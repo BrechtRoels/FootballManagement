@@ -109,15 +109,16 @@ for overlapping bookings of the same facility and warns before you double-book �
 
 ## Production deployment
 
-**Full step-by-step: [DEPLOY.md](DEPLOY.md).** Everything runs on **Vercel + Supabase** as a **single
-Vercel project** (no separate server, same origin so no CORS), redeploying on every `git push`:
+**Full step-by-step: [DEPLOY.md](DEPLOY.md).** Everything runs on **Vercel + Supabase** (no separate
+server) — two Vercel projects from this one repo, redeploying on every `git push`:
 
 1. **Database — Supabase:** copy the *Connection pooling* string (Transaction mode, port 6543, free &
    IPv4) into `DATABASE_URL` (`postgresql+psycopg://…?sslmode=require`). Run `python -m app.seed` once
    against it to create the schema + admin.
-2. **Vercel (one project, repo root):** the root [`vercel.json`](vercel.json) builds the React site and
-   runs FastAPI as a Python serverless function ([`api/index.py`](api/index.py)) under `/api`. Set just
-   `DATABASE_URL` and `SECRET_KEY`. Site at `/`, API at `/api/*` on one domain.
+2. **Backend — Vercel** (Root Directory `backend/`): Vercel auto-detects FastAPI at `backend/app/main.py`.
+   Set `DATABASE_URL`, `SECRET_KEY`, `CORS_ORIGINS`.
+3. **Frontend — Vercel** (Root Directory `frontend/`, [`frontend/vercel.json`](frontend/vercel.json)):
+   set `VITE_API_URL=https://<your-backend>.vercel.app/api`.
 
 ### Before going live
 - Set a strong `SECRET_KEY` (`python -c "import secrets; print(secrets.token_urlsafe(48))"`).

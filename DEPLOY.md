@@ -1,87 +1,93 @@
 # Deploying KSV Jabbeke (Vercel + Supabase)
 
-**One** Vercel project serves everything from a single domain, plus Supabase for the database:
+Everything runs on **Vercel + Supabase** (no Render). Two Vercel projects from this one repo —
+Vercel natively builds each:
 
-| Piece | Host |
-| --- | --- |
-| Frontend (React) | **Vercel** (static build) |
-| Backend API (FastAPI) | **Vercel** (Python serverless function under `/api`) |
-| Database (Postgres) | **Supabase** (free shared pooler, IPv4) |
+| Piece | Vercel project | Root Directory |
+| --- | --- | --- |
+| Frontend (React) | project #1 | `frontend/` (Vite) |
+| Backend API (FastAPI) | project #2 | `backend/` (auto-detected FastAPI) |
+| Database (Postgres) | — Supabase | free shared pooler (IPv4) |
 
-The root [`vercel.json`](vercel.json) builds the React app, runs FastAPI as a serverless function, and
-routes `/api/*` to it — so the site and API share one origin (**no CORS**, and `VITE_API_URL` stays `/api`).
-Redeploys on every `git push`. No Render, no separate server.
-
----
-
-## 0. Put the code on GitHub
-
-The repo is initialised locally. Create an **empty** GitHub repo, then:
-
-```bash
-cd /Users/brechtroelswork/Documents/FootballManagement
-git remote add origin https://github.com/<you>/<repo>.git
-git branch -M main
-git push -u origin main
-```
-
-`.env` files and secrets are git-ignored.
+Both redeploy on every `git push`.
 
 ---
 
-## 1. Database — Supabase  ✅ already seeded
+## 0. Code is on GitHub ✅
 
-The schema (14 tables) and the admin account already exist in your Supabase project — we ran
-`python -m app.seed` against it. You just need the **pooler** connection string.
+Repo: `github.com/BrechtRoels/FootballManagement` (already pushed). `.env`/secrets are git-ignored.
 
-Supabase → **Connect** → **Connection pooling**, *Transaction* mode (port **6543**) — **free and IPv4**
-(do *not* use the "Direct connection": IPv6-only / paid IPv4 add-on). Shape it for psycopg:
+---
+
+## 1. Database — Supabase ✅ already seeded
+
+Schema (14 tables) + admin already created (we ran `python -m app.seed`). You need the **pooler**
+string for the backend. Supabase → **Connect** → **Connection pooling**, *Transaction* mode (port
+**6543**) — **free & IPv4** (not the IPv6-only "Direct connection"). Shape it:
 
 ```
 postgresql+psycopg://postgres.<ref>:<DB-PASSWORD>@aws-0-<region>.pooler.supabase.com:6543/postgres?sslmode=require
 ```
 
-That's your `DATABASE_URL` (holds the password — keep it secret).
-
-> Re-seed a fresh DB later with:
-> `cd backend && DATABASE_URL='…6543…' FIRST_ADMIN_PASSWORD='…' .venv/bin/python -m app.seed`
-
 ---
 
-## 2. Deploy — one Vercel project
+## 2. Backend — Vercel project #2
 
 1. [vercel.com](https://vercel.com) → **Add New → Project** → import the repo.
-2. Leave **Root Directory = repo root** (the default). Vercel reads the root `vercel.json` — it builds
-   the frontend (`frontend/dist`) and the Python function (`api/index.py`, which loads FastAPI from
-   `backend/`). Don't override the build settings.
-3. Add **Environment Variables**:
+2. **Root Directory → `backend`.** Vercel auto-detects **FastAPI** (it finds `app/main.py` with the
+   `app` instance) and installs `requirements.txt`. No extra config files needed.
+3. Environment variables:
 
    | Key | Value |
    | --- | --- |
    | `DATABASE_URL` | the Supabase pooler string from step 1 |
-   | `SECRET_KEY` | a long random string — `python -c "import secrets;print(secrets.token_urlsafe(48))"` |
+   | `SECRET_KEY` | `python -c "import secrets;print(secrets.token_urlsafe(48))"` |
+   | `CORS_ORIGINS` | your frontend URL (fill in after step 3) |
 
-   That's it — **no `CORS_ORIGINS`, no `VITE_API_URL`** (same origin; the frontend calls `/api` directly).
-   `FIRST_ADMIN_*` aren't needed (the admin already exists). `VERCEL=1` is set automatically, so the app
-   uses a serverless-friendly DB setup and skips startup table-creation.
-4. Deploy. You get one URL, e.g. **`https://ksvjabbeke.vercel.app`** — site at `/`, API at `/api/*`.
+   (`FIRST_ADMIN_*` not needed — the admin exists. `VERCEL=1` is auto-set, so the app uses a
+   serverless-friendly DB pool and skips startup table-creation.)
+4. Deploy → URL like **`https://ksvjabbeke-api.vercel.app`**. Check `…/health` and `…/docs`.
 
 ---
 
-## 3. Verify
+## 3. Frontend — Vercel project #3
 
-- Open the URL and sign in as `admin@ksvjabbeke.be`.
-- If login fails: check that `DATABASE_URL` is the **pooler** string (port 6543, `?sslmode=require`) and
-  `SECRET_KEY` is set. Function logs are under the Vercel project → **Logs**.
-- Calendar subscriptions & map previews work automatically (Vercel serves HTTPS).
+1. **Add New → Project** → import the **same repo** again.
+2. **Root Directory → `frontend`.** Vite is auto-detected; [`frontend/vercel.json`](frontend/vercel.json)
+   handles SPA routing.
+3. Environment variable:
+
+   | Key | Value |
+   | --- | --- |
+   | `VITE_API_URL` | `https://ksvjabbeke-api.vercel.app/api`  ← backend URL **+ `/api`** |
+
+4. Deploy → URL like **`https://ksvjabbeke.vercel.app`**.
+
+---
+
+## 4. Connect them (CORS)
+
+In the **backend** project → Settings → Environment Variables, set `CORS_ORIGINS` to the frontend URL
+exactly (no trailing slash), then redeploy the backend:
+
+```
+CORS_ORIGINS=https://ksvjabbeke.vercel.app
+```
+
+---
+
+## 5. Verify
+
+- Open the frontend URL, sign in as `admin@ksvjabbeke.be`.
+- Login network/CORS error? Confirm `VITE_API_URL` (frontend) = backend URL **+ `/api`**, and
+  `CORS_ORIGINS` (backend) exactly matches the frontend origin.
+- Calendar subscriptions & map previews work (the feed is served from the backend's own HTTPS URL).
 
 ## Notes
-- **Serverless cold starts:** the first request after idle spins the function up (a second or two), then fast.
-- **Vercel Hobby plan** is non-commercial and has a 10s function timeout — fine for this app.
-- `/api/docs` isn't exposed in production (only `/api/*` app routes are routed to the backend); run the
-  backend locally for the interactive API docs.
-- **Schema changes later:** the seed creates *tables*; altering existing tables needs Alembic
+- **Serverless cold starts:** first request after idle spins the function up (a second or two).
+- **Vercel Hobby** is non-commercial with a 10s function timeout — fine for this app.
+- **Schema changes later:** seed/startup creates *tables*; altering existing ones needs Alembic
   (dependency already included).
 
 ## Updating
-`git push` → Vercel rebuilds and redeploys automatically.
+`git push` → both Vercel projects rebuild and redeploy automatically.

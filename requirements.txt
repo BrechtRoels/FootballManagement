@@ -1,4 +1,0 @@
-# Python dependencies for the Vercel serverless function (api/index.py).
-# Reuses the backend's list as the single source of truth (uvicorn/alembic are
-# unused at runtime on Vercel but harmless).
--r backend/requirements.txt
