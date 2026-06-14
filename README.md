@@ -71,20 +71,33 @@ npm run dev                   # http://localhost:5173
 
 Open **http://localhost:5173** and sign in.
 
-### Demo logins (after `python -m app.seed --demo`)
+### Demo accounts (after `python -m app.seed --demo`)
 
-| Role | Email | Password |
-| --- | --- | --- |
-| Admin (secretariaat) | `admin@ksvjabbeke.be` | `ChangeMe123!` |
-| Trainer (Eerste Ploeg) | `koen@ksvjabbeke.be` | `ChangeMe123!` |
-| Player (Eerste Ploeg) | `wout@ksvjabbeke.be` | `ChangeMe123!` |
+All demo **trainer and player** accounts use the password **`ChangeMe123!`**.
+(The **admin** password is set separately via `FIRST_ADMIN_PASSWORD` and is intentionally
+**not** stored in this repo.)
+
+| Role | Email |
+| --- | --- |
+| Admin (secretariaat) | `admin@ksvjabbeke.be` |
+| Trainer · Eerste Ploeg | `koen@ksvjabbeke.be` |
+| Trainer · Beloften | `bart@ksvjabbeke.be` |
+| Trainer · U17 | `niels@ksvjabbeke.be` |
+| Trainer · Dames | `lien@ksvjabbeke.be` |
+| Players · Eerste Ploeg | `wout@`, `senne@`, `lars@`, `jens@`, `ward@`, `thibault@`, `arne@`, `seppe@`, `milan@`, `brecht@`, `robbe@` |
+| Players · Beloften | `lowie@`, `vince@` |
+
+(All emails are `…@ksvjabbeke.be`.)
 
 The demo seeds KSV Jabbeke with four teams (Eerste Ploeg, Beloften, U17, Dames),
 a full first-team squad, facilities at Sportpark Jabbeke (Hoofdterrein, Terrein B,
-Kleedkamers, Kantine) and upcoming activities incl. a home match vs **SK Varsenare**.
+Kleedkamers, Kantine) and activities incl. matches vs **SK Varsenare** and **KSC Blankenberge**.
 
-The admin email/password come from `backend/.env` (`FIRST_ADMIN_*`). Run
-`python -m app.seed` (without `--demo`) to create just the admin on a clean database.
+> ⚠️ These demo accounts share a known weak password. **Delete them or change their passwords**
+> (admin → People) before real production use.
+
+The admin email/password come from the `FIRST_ADMIN_*` env vars. Run `python -m app.seed`
+(without `--demo`) to create just the admin on a clean database.
 
 ---
 
