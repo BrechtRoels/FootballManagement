@@ -1,8 +1,19 @@
+import os
 from functools import lru_cache
 from typing import Annotated
 
 from pydantic import field_validator
 from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
+
+
+def is_serverless() -> bool:
+    """True when running on Vercel / AWS Lambda.
+
+    Vercel's Python runtime executes on AWS Lambda, which always sets
+    `AWS_LAMBDA_FUNCTION_NAME` — a more reliable signal than the `VERCEL` var,
+    which isn't always exposed to the runtime.
+    """
+    return bool(os.getenv("VERCEL") or os.getenv("AWS_LAMBDA_FUNCTION_NAME"))
 
 
 class Settings(BaseSettings):

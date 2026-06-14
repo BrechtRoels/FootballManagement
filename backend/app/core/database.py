@@ -1,4 +1,3 @@
-import os
 from collections.abc import AsyncGenerator
 
 from sqlalchemy.ext.asyncio import (
@@ -9,7 +8,7 @@ from sqlalchemy.ext.asyncio import (
 from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.pool import NullPool
 
-from app.core.config import settings
+from app.core.config import is_serverless, settings
 
 # Supabase's connection pooler (PgBouncer, "Transaction" mode on port 6543) does
 # not support server-side prepared statements. Disabling them on psycopg3 keeps
@@ -19,7 +18,7 @@ _engine_kwargs: dict = {
     "echo": False,
     "connect_args": {"prepare_threshold": None},
 }
-if os.getenv("VERCEL"):
+if is_serverless():
     # Serverless: don't hold a connection pool across frozen/thawed invocations —
     # open per request and let Supabase's pooler multiplex.
     _engine_kwargs["poolclass"] = NullPool

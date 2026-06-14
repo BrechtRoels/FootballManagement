@@ -1,11 +1,10 @@
-import os
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.router import api_router
-from app.core.config import settings
+from app.core.config import is_serverless, settings
 from app.core.database import Base, engine
 
 # Import models so they are registered on the metadata before create_all.
@@ -14,15 +13,22 @@ import app.models  # noqa: F401,E402
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Create tables on startup for a persistent server / local dev. On Vercel
-    # (serverless) this is skipped — running DDL on every cold start is wasteful,
-    # and the schema is created once by `python -m app.seed` at deploy time. For
-    # ongoing schema changes, switch to Alembic migrations (see README).
-    if not os.getenv("VERCEL"):
-        async with engine.begin() as conn:
-            await conn.run_sync(Base.metadata.create_all)
+    # The schema is created once by `python -m app.seed`. For a persistent server
+    # / local dev we also create any missing tables on startup as a convenience.
+    # On serverless (Vercel/Lambda) this is skipped, and either way it is wrapped
+    # so a startup DB hiccup can never crash the function (which would make every
+    # route fail). For ongoing schema changes, switch to Alembic (see README).
+    if not is_serverless():
+        try:
+            async with engine.begin() as conn:
+                await conn.run_sync(Base.metadata.create_all)
+        except Exception as exc:  # noqa: BLE001
+            print(f"[startup] skipped create_all: {exc}")
     yield
-    await engine.dispose()
+    try:
+        await engine.dispose()
+    except Exception:  # noqa: BLE001
+        pass
 
 
 app = FastAPI(
