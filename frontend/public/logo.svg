@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 134" width="120" height="134">
+  <defs>
+    <path id="shield" d="M12 11 H108 V64 C108 99 84 118 60 126 C36 118 12 99 12 64 Z"/>
+    <clipPath id="clip"><use href="#shield"/></clipPath>
+    <pattern id="checker" width="22" height="22" patternUnits="userSpaceOnUse">
+      <rect width="22" height="22" fill="#ffffff"/>
+      <rect width="11" height="11" fill="#141414"/>
+      <rect x="11" y="11" width="11" height="11" fill="#141414"/>
+    </pattern>
+    <!-- A simplified heraldic swan, swimming, facing left (24x24 box). -->
+    <g id="swan">
+      <path d="M5 19c0-2.6 2-3.8 4.2-3.8-1.8-1-2.7-3-1.8-5.1 1-2.3 3.6-3.1 5-2.2.8.5.8 1.5.1 2-1 .7-1.5 1.8-1 2.9.4.9 1.6 1.1 2.5 1.1 3.4 0 5.6 2.3 5.6 5.2 0 1.7-1 2.7-3 2.7H7.4C6 21.8 5 20.8 5 19Z"/>
+      <path d="M8.2 9.6 4.6 9.1 7.7 11.2Z"/>
+    </g>
+  </defs>
+
+  <!-- checkered field -->
+  <g clip-path="url(#clip)">
+    <rect x="0" y="0" width="120" height="134" fill="url(#checker)"/>
+  </g>
+
+  <!-- central grey escutcheon -->
+  <path d="M60 28c16 0 26 3 26 3v30c0 23-14 33-26 39-12-6-26-16-26-39V31s10-3 26-3Z"
+        fill="#585a5c" stroke="#d8241b" stroke-width="1.6"/>
+
+  <!-- three red swans -->
+  <g fill="#d8241b">
+    <use href="#swan" transform="translate(40 40) scale(0.62)"/>
+    <use href="#swan" transform="translate(58.5 40) scale(0.62)"/>
+    <use href="#swan" transform="translate(49 66) scale(0.62)"/>
+  </g>
+
+  <!-- borders -->
+  <use href="#shield" fill="none" stroke="#d8241b" stroke-width="5"/>
+  <use href="#shield" fill="none" stroke="#585a5c" stroke-width="1.4"
+       transform="translate(0 0)" stroke-opacity="0.9" style="stroke-dasharray:0" />
+</svg>

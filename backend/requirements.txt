@@ -1,0 +1,13 @@
+# Floors chosen so pip resolves the latest builds with Python 3.14 wheels.
+fastapi>=0.115
+uvicorn[standard]>=0.34
+sqlalchemy[asyncio]>=2.0.36
+psycopg[binary]>=3.2
+alembic>=1.14
+pydantic>=2.10
+pydantic-settings>=2.7
+PyJWT>=2.10
+bcrypt>=4.2
+python-multipart>=0.0.20
+email-validator>=2.2
+certifi>=2024.8  # CA bundle for outbound HTTPS (address geocoding)

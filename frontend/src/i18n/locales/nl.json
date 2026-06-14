@@ -1,0 +1,203 @@
+{
+  "language": { "label": "Taal", "en": "English", "fr": "Français", "nl": "Nederlands", "de": "Deutsch" },
+  "common": {
+    "cancel": "Annuleren", "save": "Opslaan", "edit": "Bewerken", "create": "Aanmaken", "delete": "Verwijderen", "done": "Klaar",
+    "back": "Terug", "add": "Toevoegen", "loading": "Laden…", "loadingClub": "Je club laden…",
+    "search": "Zoeken…", "optional": "optioneel", "fullName": "Volledige naam", "email": "E-mail",
+    "phone": "Telefoon", "role": "Rol", "position": "Positie", "shirtNumber": "Rugnr.",
+    "season": "Seizoen", "category": "Categorie", "team": "Ploeg"
+  },
+  "roles": {
+    "admin": "Beheerder", "trainer": "Trainer", "player": "Speler",
+    "adminPlural": "Beheerders", "trainerPlural": "Trainers", "playerPlural": "Spelers"
+  },
+  "nav": {
+    "overview": "Overzicht", "dashboard": "Dashboard", "calendar": "Kalender", "teams": "Ploegen",
+    "people": "Personen", "facilities": "Accommodatie", "messages": "Berichten", "performance": "Prestaties", "signOut": "Afmelden",
+    "openMenu": "Menu openen", "collapseMenu": "Menu inklappen", "expandMenu": "Menu uitklappen",
+    "tagline": "Clubplatform"
+  },
+  "auth": {
+    "heroPre": "Eén thuis voor", "heroClub": "KSV Jabbeke.",
+    "heroText": "Plan trainingen en wedstrijden op Sportpark Jabbeke, bekijk de beschikbaarheid van terreinen en kleedkamers, stel je wedstrijdkern samen en houd elke speler en medewerker op de hoogte.",
+    "welcomeBack": "Welkom terug",
+    "signInPrompt": "Meld je aan met je KSV Jabbeke-account om verder te gaan.",
+    "emailLabel": "E-mailadres", "emailPlaceholder": "jij@club.be",
+    "passwordLabel": "Wachtwoord", "signIn": "Aanmelden",
+    "accountsByAdmin": "Accounts worden aangemaakt door je clubbeheerder."
+  },
+  "activityType": { "training": "Training", "match": "Wedstrijd", "meeting": "Vergadering", "event": "Evenement" },
+  "activityStatus": { "scheduled": "Gepland", "cancelled": "Geannuleerd" },
+  "availability": { "available": "Beschikbaar", "unavailable": "Niet beschikbaar", "maybe": "Misschien", "unknown": "Geen antwoord" },
+  "attend": { "yes": "Ja", "maybe": "Misschien", "no": "Nee" },
+  "homeAway": { "home": "Thuis", "away": "Uit" },
+  "resourceType": { "pitch": "Terrein", "dressing_room": "Kleedkamer", "room": "Lokaal", "other": "Andere" },
+  "dashboard": {
+    "welcome": "Welkom terug, {{name}}",
+    "subtitle": "Dit staat er voor jouw club op de planning.",
+    "scheduleActivity": "Activiteit plannen",
+    "statUpcoming": "Komende", "statMyTeams": "Mijn ploegen", "statTeams": "Ploegen",
+    "viewCalendar": "Volledige kalender bekijken →",
+    "upcomingActivities": "Komende activiteiten",
+    "emptyTitle": "Nog niets gepland",
+    "emptyManage": "Plan je eerste training of wedstrijd om te beginnen.",
+    "emptyPlayer": "Zodra je trainer activiteiten plant, verschijnen ze hier."
+  },
+  "calendar": {
+    "title": "Kalender", "subtitle": "Alle trainingen, wedstrijden, vergaderingen en evenementen.",
+    "schedule": "Plannen", "allTeams": "Alle ploegen", "upcoming": "Komende", "all": "Alle",
+    "emptyTitle": "Geen activiteiten", "emptyText": "Niets komt overeen met de huidige filter."
+  },
+  "teams": {
+    "title": "Ploegen", "subtitleAdmin": "Beheer alle clubploegen.", "subtitleMember": "Ploegen waartoe je behoort.",
+    "newTeam": "Nieuwe ploeg", "emptyTitle": "Nog geen ploegen",
+    "emptyAdmin": "Maak je eerste ploeg aan en voeg er trainers en spelers aan toe.",
+    "emptyMember": "Je bent nog niet aan een ploeg toegewezen. Je beheerder kan je toevoegen.",
+    "seasonBadge": "Seizoen {{season}}", "createTitle": "Nieuwe ploeg",
+    "teamName": "Ploegnaam", "teamNamePlaceholder": "bv. Eerste Ploeg",
+    "categoryPlaceholder": "Heren, U17…", "createTeam": "Ploeg aanmaken"
+  },
+  "teamDetail": {
+    "staff": "Staf", "playersCount": "Spelers ({{count}})",
+    "noTrainers": "Nog geen trainers toegewezen.", "noPlayers": "Nog geen spelers toegewezen.",
+    "upcoming": "Komende", "nothingScheduled": "Niets gepland.",
+    "notFound": "Ploeg niet gevonden", "notFoundDesc": "Ze is mogelijk verwijderd.",
+    "schedule": "Plannen", "addMember": "Lid toevoegen",
+    "feedersTitle": "Oproepen — voedingsploegen",
+    "feedersDesc": "Spelers uit deze ploegen kunnen geselecteerd worden voor wedstrijden van {{team}}.",
+    "feedersEmpty": "Geen voedingsploegen gekoppeld.", "feederAdd": "Voedingsploeg toevoegen…",
+    "feederLink": "Koppelen", "removeFromTeam": "Uit ploeg verwijderen", "removeFeeder": "Koppeling verwijderen",
+    "dressingRoomsTitle": "Kleedkamers (thuis)",
+    "dressingRoomsDesc": "Worden automatisch gereserveerd voor thuistrainingen en -wedstrijden (trainers kiezen ze niet). Bij een thuiswedstrijd krijgt de tegenstander ook een vrije kleedkamer.",
+    "dressingRoomsNone": "Nog geen kleedkamers gedefinieerd. Voeg ze toe bij Accommodatie."
+  },
+  "addMember": {
+    "title": "Lid toevoegen", "existing": "Bestaand persoon", "new": "Nieuw account",
+    "searchPeople": "Personen zoeken…", "noPeople": "Geen beschikbare personen. Maak in plaats daarvan een nieuw account aan.",
+    "roleInTeam": "Rol in ploeg", "fullNamePlaceholder": "Jan Janssens", "emailPlaceholder": "jan@club.be",
+    "addToTeam": "Aan ploeg toevoegen", "createdTitle": "Account aangemaakt",
+    "shareSecurely": "Deel deze gegevens veilig", "tempPassword": "Tijdelijk wachtwoord",
+    "shownOnce": "Dit wachtwoord wordt eenmalig getoond. Het lid wijzigt het best na de eerste aanmelding."
+  },
+  "activityForm": {
+    "title": "Activiteit plannen", "editTitle": "Activiteit bewerken", "team": "Ploeg", "type": "Type", "titleLabel": "Titel",
+    "titlePlaceholderMatch": "bv. Competitie: tegen Rovers FC", "titlePlaceholderOther": "bv. Dinsdagtraining",
+    "opponent": "Tegenstander", "opponentPlaceholder": "Rovers FC", "homeAway": "Thuis / Uit",
+    "date": "Datum", "start": "Begin", "end": "Einde", "location": "Locatie / adres",
+    "locationPlaceholder": "bv. Sportpark Jabbeke, Krukkelstraat 1, 8490 Jabbeke",
+    "locationFromFacilities": "Locatie (van accommodatie)",
+    "locationDerivedEmpty": "Kies een terrein of lokaal met een adres om de locatie in te stellen.",
+    "locationAutoHint": "De locatie wordt overgenomen van de gereserveerde accommodatie.",
+    "autoRoomsHint": "Kleedkamers worden automatisch toegewezen vanuit de ploegkleedkamers.",
+    "autoRoomsMatchHint": "Kleedkamers worden automatisch toegewezen — de ploegkleedkamers plus een vrije kleedkamer voor de tegenstander.",
+    "reserveFacilities": "Accommodatie reserveren",
+    "noFacilities": "Nog geen accommodatie gedefinieerd (een beheerder kan terreinen en lokalen toevoegen).",
+    "conflictTitle": "Reservatieconflict", "conflictItem": "{{resource}} is al gereserveerd door \"{{activity}}\".",
+    "scheduleAnyway": "Toch plannen", "schedule": "Plannen", "saveChanges": "Wijzigingen opslaan", "saveAnyway": "Toch opslaan",
+    "errComplete": "Vul de verplichte velden in", "errTitle": "Geef een titel in",
+    "errTimes": "Het einduur moet na het beginuur liggen"
+  },
+  "activityDetail": {
+    "edit": "Bewerken", "cancel": "Annuleren", "confirmCancel": "Deze activiteit annuleren? Leden worden verwittigd.",
+    "confirmDelete": "Deze activiteit definitief verwijderen?",
+    "squadAvailability": "Kern & beschikbaarheid", "squad": "Kern", "availability": "Beschikbaarheid",
+    "selectedCount": "{{count}} geselecteerd", "emptyTitle": "Nog geen spelers in deze ploeg",
+    "emptyDesc": "Voeg spelers toe aan de ploeg om beschikbaarheid op te volgen.",
+    "reservedFacilities": "Gereserveerde accommodatie", "canYouAttend": "Ben je aanwezig?",
+    "youAreSelected": "Je bent geselecteerd voor de kern", "callups": "Oproepen",
+    "callupsFrom": "uit voedingsploegen", "select": "Selecteren", "selected": "Geselecteerd",
+    "callupSearchPlaceholder": "Zoek spelers uit voedingsploegen…",
+    "callupNoMatch": "Geen spelers gevonden",
+    "callupNoneLeft": "Alle spelers uit voedingsploegen zijn al opgeroepen",
+    "callupEmpty": "Nog geen oproepen — zoek hierboven om spelers uit voedingsploegen toe te voegen.",
+    "vs": "tegen {{opponent}}", "notFound": "Activiteit niet gevonden"
+  },
+  "messages": {
+    "title": "Berichten", "subtitle": "Ploegkanalen en één-op-één gesprekken.",
+    "teamChannels": "Ploegkanalen", "directMessages": "Directe berichten",
+    "noTeams": "Geen ploegen", "noPeople": "Geen personen om te berichten",
+    "selectPrompt": "Kies een ploegkanaal of een persoon om te chatten.",
+    "teamChannelSub": "Ploegkanaal · iedereen in deze ploeg", "directSub": "Direct bericht · privé",
+    "teamEmpty": "Nog geen berichten. Zeg hallo tegen je ploeg 👋",
+    "directEmpty": "Dit is het begin van je gesprek met {{name}}.",
+    "typeMessage": "Typ een bericht…", "noTeamChat": "Nog geen ploegchat",
+    "noTeamChatDesc": "Je kan chatten zodra je deel uitmaakt van een ploeg."
+  },
+  "notifications": { "title": "Meldingen", "markAllRead": "Alles als gelezen markeren", "empty": "Nog geen meldingen" },
+  "admin": {
+    "overviewTitle": "Cluboverzicht",
+    "overviewSubtitle": "Beheer ploegen, personen en accommodatie voor KSV Jabbeke.",
+    "statTeams": "Ploegen", "statTrainers": "Trainers", "statPlayers": "Spelers", "statFacilities": "Accommodatie",
+    "actionAddPersonTitle": "Speler of trainer toevoegen", "actionAddPersonDesc": "Maak een account en inloggegevens aan",
+    "actionCreateTeamTitle": "Ploeg aanmaken", "actionCreateTeamDesc": "Wijs daarna trainers en spelers toe",
+    "actionAddFacilityTitle": "Accommodatie toevoegen", "actionAddFacilityDesc": "Terreinen, kleedkamers, lokalen",
+    "teams": "Ploegen", "manageAll": "Alles beheren →",
+    "noTeams": "Nog geen ploegen. Maak je eerste ploeg aan om te beginnen.",
+    "recentPeople": "Recent toegevoegde personen", "noAccounts": "Nog geen accounts.",
+    "signedInAs": "Aangemeld als {{name}} · Beheerder"
+  },
+  "people": {
+    "title": "Personen", "subtitle": "Maak en beheer accounts voor trainers, spelers en beheerders.",
+    "newAccount": "Nieuw account", "searchPlaceholder": "Zoeken op naam of e-mail…", "allRoles": "Alle rollen",
+    "emptyTitle": "Geen personen gevonden", "emptyDesc": "Maak accounts aan voor je trainers en spelers om te beginnen.",
+    "deactivated": "(gedeactiveerd)", "resetPassword": "Wachtwoord opnieuw instellen", "deactivate": "Deactiveren",
+    "reactivate": "Heractiveren", "delete": "Verwijderen", "confirmDelete": "{{name}} verwijderen? Dit kan niet ongedaan gemaakt worden.",
+    "tempPasswordTitle": "Tijdelijk wachtwoord", "shareSecurely": "Deel deze gegevens veilig",
+    "password": "Wachtwoord", "shownOnceShort": "Wordt eenmalig getoond. Vraag het lid om het na de eerste aanmelding te wijzigen.",
+    "createTitle": "Nieuw account", "createHint": "Een tijdelijk wachtwoord wordt automatisch aangemaakt en eenmalig getoond.",
+    "fullNamePlaceholder": "Jan Janssens", "emailPlaceholder": "jan@club.be", "phoneOptional": "Telefoon (optioneel)",
+    "teamRequired": "Ploeg", "teamSelect": "Kies een ploeg…", "teamNone": "Nog geen ploeg",
+    "playerNeedsTeam": "Een speler moet aan een ploeg toegewezen zijn.", "createAccount": "Account aanmaken",
+    "administrator": "Beheerder"
+  },
+  "facilities": {
+    "title": "Accommodatie",
+    "subtitle": "Terreinen, kleedkamers en vergaderlokalen die je voor activiteiten kan reserveren.",
+    "newFacility": "Nieuwe accommodatie", "emptyTitle": "Nog geen accommodatie",
+    "emptyDesc": "Voeg terreinen en lokalen toe zodat trainers ze kunnen reserveren en dubbele boekingen vermijden.",
+    "confirmDelete": "{{name}} verwijderen?", "createTitle": "Nieuwe accommodatie", "editTitle": "Accommodatie bewerken", "name": "Naam",
+    "namePlaceholder": "bv. Hoofdterrein", "type": "Type", "capacity": "Capaciteit",
+    "location": "Adres", "locationPlaceholder": "bv. Krukkelstraat, 8490 Jabbeke"
+  },
+  "maps": { "open": "Openen in kaarten", "choose": "Kies een app", "google": "Google Maps", "waze": "Waze", "apple": "Apple Maps" },
+  "addCal": { "button": "Aan agenda toevoegen", "google": "Google Agenda", "apple": "Apple Agenda", "download": "Downloaden (.ics)" },
+  "subscribe": {
+    "button": "Abonneren", "title": "Abonneer op je agenda",
+    "intro": "Voeg deze agenda toe aan je telefoon of computer. Ze werkt automatisch bij wanneer activiteiten wijzigen.",
+    "copy": "Kopiëren", "copied": "Gekopieerd", "apple": "Apple / Outlook", "google": "Google Agenda",
+    "autoUpdate": "Je agenda-app vernieuwt dit automatisch (meestal binnen een dag).",
+    "reset": "Link opnieuw instellen", "resetConfirm": "Je agendalink opnieuw instellen? De oude URL werkt dan niet meer."
+  },
+  "performance": {
+    "ratePlayers": "Beoordeel spelers",
+    "rateIntro": "Geef elke speler tot 5 sterren voor prestatie en mentaliteit. Optioneel — beoordeel wie je wil.",
+    "noPlayers": "Nog geen spelers om te beoordelen.",
+    "performanceRating": "Prestatie",
+    "mentalityRating": "Mentaliteit",
+    "note": "Notitie",
+    "notePlaceholder": "Optionele privénotitie (enkel voor de staf — niet zichtbaar voor de speler)",
+    "save": "Beoordelingen opslaan",
+    "subtitle": "Prestaties doorheen de tijd",
+    "notFound": "Geen prestatiegegevens",
+    "statAvgPerformance": "Gem. prestatie",
+    "statAvgMentality": "Gem. mentaliteit",
+    "statRated": "Aantal beoordelingen",
+    "statAppearances": "Deelnames",
+    "statAvailability": "Beschikbaarheid",
+    "statSelection": "Geselecteerd",
+    "noData": "Nog niet genoeg gegevens.",
+    "recent": "Recente beoordelingen",
+    "notRatedYet": "Nog geen beoordelingen.",
+    "teamSummary": "Prestaties",
+    "teamSummaryDesc": "Gemiddelde trainersbeoordeling per speler. Tik op een naam voor details.",
+    "overviewTitle": "Spelersprestaties",
+    "overviewSubtitle": "Gemiddelde trainersbeoordelingen en trends per speler, doorheen het seizoen.",
+    "noTeams": "Je coacht nog geen ploegen."
+  },
+  "geo": {
+    "verified": "Adres gecontroleerd",
+    "notFound": "Adres niet gevonden — kies een suggestie of controleer de spelling.",
+    "findVenue": "Zoek terrein van {{opponent}}"
+  },
+  "dates": { "today": "Vandaag", "tomorrow": "Morgen" }
+}

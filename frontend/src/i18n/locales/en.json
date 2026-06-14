@@ -1,0 +1,203 @@
+{
+  "language": { "label": "Language", "en": "English", "fr": "Français", "nl": "Nederlands", "de": "Deutsch" },
+  "common": {
+    "cancel": "Cancel", "save": "Save", "edit": "Edit", "create": "Create", "delete": "Delete", "done": "Done",
+    "back": "Back", "add": "Add", "loading": "Loading…", "loadingClub": "Loading your club…",
+    "search": "Search…", "optional": "optional", "fullName": "Full name", "email": "Email",
+    "phone": "Phone", "role": "Role", "position": "Position", "shirtNumber": "Shirt #",
+    "season": "Season", "category": "Category", "team": "Team"
+  },
+  "roles": {
+    "admin": "Administrator", "trainer": "Trainer", "player": "Player",
+    "adminPlural": "Admins", "trainerPlural": "Trainers", "playerPlural": "Players"
+  },
+  "nav": {
+    "overview": "Overview", "dashboard": "Dashboard", "calendar": "Calendar", "teams": "Teams",
+    "people": "People", "facilities": "Facilities", "messages": "Messages", "performance": "Performance", "signOut": "Sign out",
+    "openMenu": "Open menu", "collapseMenu": "Collapse menu", "expandMenu": "Expand menu",
+    "tagline": "Clubplatform"
+  },
+  "auth": {
+    "heroPre": "One home for", "heroClub": "KSV Jabbeke.",
+    "heroText": "Plan trainings and matches at Sportpark Jabbeke, check pitch and dressing-room availability, pick your matchday squad, and keep every player and staff member in sync.",
+    "welcomeBack": "Welcome back",
+    "signInPrompt": "Sign in to your KSV Jabbeke account to continue.",
+    "emailLabel": "Email address", "emailPlaceholder": "you@club.com",
+    "passwordLabel": "Password", "signIn": "Sign in",
+    "accountsByAdmin": "Accounts are created by your club administrator."
+  },
+  "activityType": { "training": "Training", "match": "Match", "meeting": "Meeting", "event": "Event" },
+  "activityStatus": { "scheduled": "Scheduled", "cancelled": "Cancelled" },
+  "availability": { "available": "Available", "unavailable": "Unavailable", "maybe": "Maybe", "unknown": "No response" },
+  "attend": { "yes": "Yes", "maybe": "Maybe", "no": "No" },
+  "homeAway": { "home": "Home", "away": "Away" },
+  "resourceType": { "pitch": "Pitch", "dressing_room": "Dressing room", "room": "Room", "other": "Other" },
+  "dashboard": {
+    "welcome": "Welcome back, {{name}}",
+    "subtitle": "Here's what's coming up across your club.",
+    "scheduleActivity": "Schedule activity",
+    "statUpcoming": "Upcoming", "statMyTeams": "My teams", "statTeams": "Teams",
+    "viewCalendar": "View full calendar →",
+    "upcomingActivities": "Upcoming activities",
+    "emptyTitle": "Nothing scheduled yet",
+    "emptyManage": "Schedule your first training or match to get started.",
+    "emptyPlayer": "When your trainer schedules activities, they'll appear here."
+  },
+  "calendar": {
+    "title": "Calendar", "subtitle": "All trainings, matches, meetings and events.",
+    "schedule": "Schedule", "allTeams": "All teams", "upcoming": "Upcoming", "all": "All",
+    "emptyTitle": "No activities", "emptyText": "Nothing matches the current filter."
+  },
+  "teams": {
+    "title": "Teams", "subtitleAdmin": "Manage all club teams.", "subtitleMember": "Teams you belong to.",
+    "newTeam": "New team", "emptyTitle": "No teams yet",
+    "emptyAdmin": "Create your first team, then add trainers and players to it.",
+    "emptyMember": "You're not assigned to a team yet. Your administrator can add you.",
+    "seasonBadge": "Season {{season}}", "createTitle": "New team",
+    "teamName": "Team name", "teamNamePlaceholder": "e.g. First Team",
+    "categoryPlaceholder": "Senior Men, U17…", "createTeam": "Create team"
+  },
+  "teamDetail": {
+    "staff": "Staff", "playersCount": "Players ({{count}})",
+    "noTrainers": "No trainers assigned yet.", "noPlayers": "No players assigned yet.",
+    "upcoming": "Upcoming", "nothingScheduled": "Nothing scheduled.",
+    "notFound": "Team not found", "notFoundDesc": "It may have been removed.",
+    "schedule": "Schedule", "addMember": "Add member",
+    "feedersTitle": "Call-ups — feeder teams",
+    "feedersDesc": "Players from these teams can be selected for {{team}}'s matches.",
+    "feedersEmpty": "No feeder teams linked.", "feederAdd": "Add a feeder team…",
+    "feederLink": "Link", "removeFromTeam": "Remove from team", "removeFeeder": "Remove feeder link",
+    "dressingRoomsTitle": "Home dressing rooms",
+    "dressingRoomsDesc": "Reserved automatically for home trainings and matches (trainers don't pick them). For a home match the opponent also gets a free room.",
+    "dressingRoomsNone": "No dressing rooms defined yet. Add some under Facilities."
+  },
+  "addMember": {
+    "title": "Add member", "existing": "Existing person", "new": "New account",
+    "searchPeople": "Search people…", "noPeople": "No available people. Create a new account instead.",
+    "roleInTeam": "Role in team", "fullNamePlaceholder": "Jane Doe", "emailPlaceholder": "jane@club.com",
+    "addToTeam": "Add to team", "createdTitle": "Account created",
+    "shareSecurely": "Share these credentials securely", "tempPassword": "Temporary password",
+    "shownOnce": "This password is shown once. The member should change it after first sign-in."
+  },
+  "activityForm": {
+    "title": "Schedule activity", "editTitle": "Edit activity", "team": "Team", "type": "Type", "titleLabel": "Title",
+    "titlePlaceholderMatch": "e.g. League: vs Rovers FC", "titlePlaceholderOther": "e.g. Tuesday Training",
+    "opponent": "Opponent", "opponentPlaceholder": "Rovers FC", "homeAway": "Home / Away",
+    "date": "Date", "start": "Start", "end": "End", "location": "Location / address",
+    "locationPlaceholder": "e.g. Sportpark Jabbeke, Krukkelstraat 1, 8490 Jabbeke",
+    "locationFromFacilities": "Location (from facilities)",
+    "locationDerivedEmpty": "Select a pitch or room that has an address to set the location.",
+    "locationAutoHint": "The location is taken from the reserved facilities.",
+    "autoRoomsHint": "Dressing rooms are assigned automatically from the team's rooms.",
+    "autoRoomsMatchHint": "Dressing rooms are assigned automatically — the team's rooms plus a free room for the opponent.",
+    "reserveFacilities": "Reserve facilities",
+    "noFacilities": "No facilities defined yet (an admin can add pitches and rooms).",
+    "conflictTitle": "Booking conflict", "conflictItem": "{{resource}} is already booked by \"{{activity}}\".",
+    "scheduleAnyway": "Schedule anyway", "schedule": "Schedule", "saveChanges": "Save changes", "saveAnyway": "Save anyway",
+    "errComplete": "Please complete the required fields", "errTitle": "Please enter a title",
+    "errTimes": "End time must be after start time"
+  },
+  "activityDetail": {
+    "edit": "Edit", "cancel": "Cancel", "confirmCancel": "Cancel this activity? Members will be notified.",
+    "confirmDelete": "Delete this activity permanently?",
+    "squadAvailability": "Squad & availability", "squad": "Squad", "availability": "Availability",
+    "selectedCount": "{{count}} selected", "emptyTitle": "No players in this team yet",
+    "emptyDesc": "Add players to the team to track availability.",
+    "reservedFacilities": "Reserved facilities", "canYouAttend": "Can you attend?",
+    "youAreSelected": "You are selected for the squad", "callups": "Call-ups",
+    "callupsFrom": "from feeder teams", "select": "Select", "selected": "Selected",
+    "callupSearchPlaceholder": "Search players from feeder teams…",
+    "callupNoMatch": "No players match your search",
+    "callupNoneLeft": "All feeder players are already called up",
+    "callupEmpty": "No call-ups yet — search above to add players from feeder teams.",
+    "vs": "vs {{opponent}}", "notFound": "Activity not found"
+  },
+  "messages": {
+    "title": "Messages", "subtitle": "Team channels and one-to-one conversations.",
+    "teamChannels": "Team channels", "directMessages": "Direct messages",
+    "noTeams": "No teams", "noPeople": "No people to message",
+    "selectPrompt": "Select a team channel or a person to start chatting.",
+    "teamChannelSub": "Team channel · everyone in this team", "directSub": "Direct message · private",
+    "teamEmpty": "No messages yet. Say hello to your team 👋",
+    "directEmpty": "This is the start of your conversation with {{name}}.",
+    "typeMessage": "Type a message…", "noTeamChat": "No team chat yet",
+    "noTeamChatDesc": "You'll be able to chat once you're part of a team."
+  },
+  "notifications": { "title": "Notifications", "markAllRead": "Mark all read", "empty": "No notifications yet" },
+  "admin": {
+    "overviewTitle": "Club overview",
+    "overviewSubtitle": "Manage teams, people and facilities for KSV Jabbeke.",
+    "statTeams": "Teams", "statTrainers": "Trainers", "statPlayers": "Players", "statFacilities": "Facilities",
+    "actionAddPersonTitle": "Add a player or trainer", "actionAddPersonDesc": "Create an account and credentials",
+    "actionCreateTeamTitle": "Create a team", "actionCreateTeamDesc": "Then assign trainers and players",
+    "actionAddFacilityTitle": "Add a facility", "actionAddFacilityDesc": "Pitches, dressing rooms, rooms",
+    "teams": "Teams", "manageAll": "Manage all →",
+    "noTeams": "No teams yet. Create your first team to get started.",
+    "recentPeople": "Recently added people", "noAccounts": "No accounts yet.",
+    "signedInAs": "Signed in as {{name}} · Administrator"
+  },
+  "people": {
+    "title": "People", "subtitle": "Create and manage trainer, player and admin accounts.",
+    "newAccount": "New account", "searchPlaceholder": "Search by name or email…", "allRoles": "All roles",
+    "emptyTitle": "No people found", "emptyDesc": "Create accounts for your trainers and players to get started.",
+    "deactivated": "(deactivated)", "resetPassword": "Reset password", "deactivate": "Deactivate",
+    "reactivate": "Reactivate", "delete": "Delete", "confirmDelete": "Delete {{name}}? This cannot be undone.",
+    "tempPasswordTitle": "Temporary password", "shareSecurely": "Share these credentials securely",
+    "password": "Password", "shownOnceShort": "Shown once only. Ask the member to change it after first sign-in.",
+    "createTitle": "New account", "createHint": "A temporary password is generated automatically and shown once.",
+    "fullNamePlaceholder": "Jane Doe", "emailPlaceholder": "jane@club.com", "phoneOptional": "Phone (optional)",
+    "teamRequired": "Team", "teamSelect": "Select a team…", "teamNone": "No team yet",
+    "playerNeedsTeam": "A player must be assigned to a team.", "createAccount": "Create account",
+    "administrator": "Administrator"
+  },
+  "facilities": {
+    "title": "Facilities",
+    "subtitle": "Pitches, dressing rooms and meeting rooms you can reserve for activities.",
+    "newFacility": "New facility", "emptyTitle": "No facilities yet",
+    "emptyDesc": "Add pitches and rooms so trainers can reserve them and avoid double-bookings.",
+    "confirmDelete": "Delete {{name}}?", "createTitle": "New facility", "editTitle": "Edit facility", "name": "Name",
+    "namePlaceholder": "e.g. Main Pitch", "type": "Type", "capacity": "Capacity",
+    "location": "Address", "locationPlaceholder": "e.g. Krukkelstraat, 8490 Jabbeke"
+  },
+  "maps": { "open": "Open in maps", "choose": "Choose an app", "google": "Google Maps", "waze": "Waze", "apple": "Apple Maps" },
+  "addCal": { "button": "Add to calendar", "google": "Google Calendar", "apple": "Apple Calendar", "download": "Download (.ics)" },
+  "subscribe": {
+    "button": "Subscribe", "title": "Subscribe to your agenda",
+    "intro": "Add this calendar to your phone or computer. It updates automatically when activities change.",
+    "copy": "Copy", "copied": "Copied", "apple": "Apple / Outlook", "google": "Google Calendar",
+    "autoUpdate": "Your calendar app refreshes this automatically (usually within a day).",
+    "reset": "Reset link", "resetConfirm": "Reset your calendar link? The old URL will stop working."
+  },
+  "performance": {
+    "ratePlayers": "Rate players",
+    "rateIntro": "Give each player up to 5 stars for performance and mentality. Optional — rate whoever you want.",
+    "noPlayers": "No players to rate yet.",
+    "performanceRating": "Performance",
+    "mentalityRating": "Mentality",
+    "note": "Note",
+    "notePlaceholder": "Optional private note (coaching staff only — not visible to the player)",
+    "save": "Save ratings",
+    "subtitle": "Performance over time",
+    "notFound": "No performance data",
+    "statAvgPerformance": "Avg performance",
+    "statAvgMentality": "Avg mentality",
+    "statRated": "Times rated",
+    "statAppearances": "Appearances",
+    "statAvailability": "Availability",
+    "statSelection": "Selected",
+    "noData": "Not enough data yet.",
+    "recent": "Recent ratings",
+    "notRatedYet": "No ratings yet.",
+    "teamSummary": "Performance",
+    "teamSummaryDesc": "Average trainer ratings per player. Tap a name for details.",
+    "overviewTitle": "Player performance",
+    "overviewSubtitle": "Average trainer ratings and trends per player, over the season.",
+    "noTeams": "You don't coach any teams yet."
+  },
+  "geo": {
+    "verified": "Address verified",
+    "notFound": "Address not found — pick a suggestion or check the spelling.",
+    "findVenue": "Find {{opponent}}'s ground"
+  },
+  "dates": { "today": "Today", "tomorrow": "Tomorrow" }
+}

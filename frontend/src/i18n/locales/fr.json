@@ -1,0 +1,203 @@
+{
+  "language": { "label": "Langue", "en": "English", "fr": "Français", "nl": "Nederlands", "de": "Deutsch" },
+  "common": {
+    "cancel": "Annuler", "save": "Enregistrer", "edit": "Modifier", "create": "Créer", "delete": "Supprimer", "done": "Terminé",
+    "back": "Retour", "add": "Ajouter", "loading": "Chargement…", "loadingClub": "Chargement de votre club…",
+    "search": "Rechercher…", "optional": "facultatif", "fullName": "Nom complet", "email": "E-mail",
+    "phone": "Téléphone", "role": "Rôle", "position": "Poste", "shirtNumber": "N° maillot",
+    "season": "Saison", "category": "Catégorie", "team": "Équipe"
+  },
+  "roles": {
+    "admin": "Administrateur", "trainer": "Entraîneur", "player": "Joueur",
+    "adminPlural": "Administrateurs", "trainerPlural": "Entraîneurs", "playerPlural": "Joueurs"
+  },
+  "nav": {
+    "overview": "Aperçu", "dashboard": "Tableau de bord", "calendar": "Calendrier", "teams": "Équipes",
+    "people": "Personnes", "facilities": "Installations", "messages": "Messages", "performance": "Performance", "signOut": "Se déconnecter",
+    "openMenu": "Ouvrir le menu", "collapseMenu": "Réduire le menu", "expandMenu": "Déployer le menu",
+    "tagline": "Plateforme du club"
+  },
+  "auth": {
+    "heroPre": "Un seul espace pour", "heroClub": "KSV Jabbeke.",
+    "heroText": "Planifiez entraînements et matchs au Sportpark Jabbeke, vérifiez la disponibilité des terrains et vestiaires, composez votre équipe et gardez chaque joueur et membre du staff informé.",
+    "welcomeBack": "Bon retour",
+    "signInPrompt": "Connectez-vous à votre compte KSV Jabbeke pour continuer.",
+    "emailLabel": "Adresse e-mail", "emailPlaceholder": "vous@club.be",
+    "passwordLabel": "Mot de passe", "signIn": "Se connecter",
+    "accountsByAdmin": "Les comptes sont créés par l'administrateur de votre club."
+  },
+  "activityType": { "training": "Entraînement", "match": "Match", "meeting": "Réunion", "event": "Événement" },
+  "activityStatus": { "scheduled": "Planifié", "cancelled": "Annulé" },
+  "availability": { "available": "Disponible", "unavailable": "Indisponible", "maybe": "Peut-être", "unknown": "Sans réponse" },
+  "attend": { "yes": "Oui", "maybe": "Peut-être", "no": "Non" },
+  "homeAway": { "home": "Domicile", "away": "Extérieur" },
+  "resourceType": { "pitch": "Terrain", "dressing_room": "Vestiaire", "room": "Salle", "other": "Autre" },
+  "dashboard": {
+    "welcome": "Bon retour, {{name}}",
+    "subtitle": "Voici ce qui arrive dans votre club.",
+    "scheduleActivity": "Planifier une activité",
+    "statUpcoming": "À venir", "statMyTeams": "Mes équipes", "statTeams": "Équipes",
+    "viewCalendar": "Voir le calendrier complet →",
+    "upcomingActivities": "Activités à venir",
+    "emptyTitle": "Rien de planifié pour l'instant",
+    "emptyManage": "Planifiez votre premier entraînement ou match pour commencer.",
+    "emptyPlayer": "Dès que votre entraîneur planifie des activités, elles apparaîtront ici."
+  },
+  "calendar": {
+    "title": "Calendrier", "subtitle": "Tous les entraînements, matchs, réunions et événements.",
+    "schedule": "Planifier", "allTeams": "Toutes les équipes", "upcoming": "À venir", "all": "Tout",
+    "emptyTitle": "Aucune activité", "emptyText": "Rien ne correspond au filtre actuel."
+  },
+  "teams": {
+    "title": "Équipes", "subtitleAdmin": "Gérez toutes les équipes du club.", "subtitleMember": "Équipes auxquelles vous appartenez.",
+    "newTeam": "Nouvelle équipe", "emptyTitle": "Aucune équipe",
+    "emptyAdmin": "Créez votre première équipe, puis ajoutez-y des entraîneurs et des joueurs.",
+    "emptyMember": "Vous n'êtes pas encore affecté à une équipe. Votre administrateur peut vous ajouter.",
+    "seasonBadge": "Saison {{season}}", "createTitle": "Nouvelle équipe",
+    "teamName": "Nom de l'équipe", "teamNamePlaceholder": "p. ex. Première équipe",
+    "categoryPlaceholder": "Seniors, U17…", "createTeam": "Créer l'équipe"
+  },
+  "teamDetail": {
+    "staff": "Staff", "playersCount": "Joueurs ({{count}})",
+    "noTrainers": "Aucun entraîneur affecté.", "noPlayers": "Aucun joueur affecté.",
+    "upcoming": "À venir", "nothingScheduled": "Rien de planifié.",
+    "notFound": "Équipe introuvable", "notFoundDesc": "Elle a peut-être été supprimée.",
+    "schedule": "Planifier", "addMember": "Ajouter un membre",
+    "feedersTitle": "Appels — équipes affiliées",
+    "feedersDesc": "Les joueurs de ces équipes peuvent être sélectionnés pour les matchs de {{team}}.",
+    "feedersEmpty": "Aucune équipe affiliée liée.", "feederAdd": "Ajouter une équipe affiliée…",
+    "feederLink": "Lier", "removeFromTeam": "Retirer de l'équipe", "removeFeeder": "Supprimer le lien",
+    "dressingRoomsTitle": "Vestiaires (domicile)",
+    "dressingRoomsDesc": "Réservés automatiquement pour les entraînements et matchs à domicile (les entraîneurs ne les choisissent pas). Pour un match à domicile, un vestiaire libre est aussi réservé pour l'adversaire.",
+    "dressingRoomsNone": "Aucun vestiaire défini. Ajoutez-en dans Installations."
+  },
+  "addMember": {
+    "title": "Ajouter un membre", "existing": "Personne existante", "new": "Nouveau compte",
+    "searchPeople": "Rechercher des personnes…", "noPeople": "Aucune personne disponible. Créez plutôt un nouveau compte.",
+    "roleInTeam": "Rôle dans l'équipe", "fullNamePlaceholder": "Jean Dupont", "emailPlaceholder": "jean@club.be",
+    "addToTeam": "Ajouter à l'équipe", "createdTitle": "Compte créé",
+    "shareSecurely": "Partagez ces identifiants en toute sécurité", "tempPassword": "Mot de passe temporaire",
+    "shownOnce": "Ce mot de passe n'est affiché qu'une fois. Le membre devrait le modifier après sa première connexion."
+  },
+  "activityForm": {
+    "title": "Planifier une activité", "editTitle": "Modifier l'activité", "team": "Équipe", "type": "Type", "titleLabel": "Titre",
+    "titlePlaceholderMatch": "p. ex. Championnat : contre Rovers FC", "titlePlaceholderOther": "p. ex. Entraînement du mardi",
+    "opponent": "Adversaire", "opponentPlaceholder": "Rovers FC", "homeAway": "Domicile / Extérieur",
+    "date": "Date", "start": "Début", "end": "Fin", "location": "Lieu / adresse",
+    "locationPlaceholder": "p. ex. Sportpark Jabbeke, Krukkelstraat 1, 8490 Jabbeke",
+    "locationFromFacilities": "Lieu (d'après les installations)",
+    "locationDerivedEmpty": "Sélectionnez un terrain ou une salle avec une adresse pour définir le lieu.",
+    "locationAutoHint": "Le lieu est repris des installations réservées.",
+    "autoRoomsHint": "Les vestiaires sont attribués automatiquement à partir des vestiaires de l'équipe.",
+    "autoRoomsMatchHint": "Les vestiaires sont attribués automatiquement — ceux de l'équipe plus un vestiaire libre pour l'adversaire.",
+    "reserveFacilities": "Réserver des installations",
+    "noFacilities": "Aucune installation définie (un administrateur peut ajouter des terrains et des salles).",
+    "conflictTitle": "Conflit de réservation", "conflictItem": "{{resource}} est déjà réservé par « {{activity}} ».",
+    "scheduleAnyway": "Planifier quand même", "schedule": "Planifier", "saveChanges": "Enregistrer les modifications", "saveAnyway": "Enregistrer quand même",
+    "errComplete": "Veuillez compléter les champs requis", "errTitle": "Veuillez saisir un titre",
+    "errTimes": "L'heure de fin doit être après l'heure de début"
+  },
+  "activityDetail": {
+    "edit": "Modifier", "cancel": "Annuler", "confirmCancel": "Annuler cette activité ? Les membres seront avertis.",
+    "confirmDelete": "Supprimer définitivement cette activité ?",
+    "squadAvailability": "Effectif & disponibilité", "squad": "Effectif", "availability": "Disponibilité",
+    "selectedCount": "{{count}} sélectionné(s)", "emptyTitle": "Aucun joueur dans cette équipe",
+    "emptyDesc": "Ajoutez des joueurs à l'équipe pour suivre les disponibilités.",
+    "reservedFacilities": "Installations réservées", "canYouAttend": "Êtes-vous présent ?",
+    "youAreSelected": "Vous êtes sélectionné dans l'effectif", "callups": "Appels",
+    "callupsFrom": "des équipes affiliées", "select": "Sélectionner", "selected": "Sélectionné",
+    "callupSearchPlaceholder": "Rechercher des joueurs des équipes affiliées…",
+    "callupNoMatch": "Aucun joueur ne correspond",
+    "callupNoneLeft": "Tous les joueurs des équipes affiliées sont déjà convoqués",
+    "callupEmpty": "Aucune convocation — recherchez ci-dessus pour ajouter des joueurs des équipes affiliées.",
+    "vs": "contre {{opponent}}", "notFound": "Activité introuvable"
+  },
+  "messages": {
+    "title": "Messages", "subtitle": "Canaux d'équipe et conversations privées.",
+    "teamChannels": "Canaux d'équipe", "directMessages": "Messages directs",
+    "noTeams": "Aucune équipe", "noPeople": "Personne à contacter",
+    "selectPrompt": "Sélectionnez un canal d'équipe ou une personne pour discuter.",
+    "teamChannelSub": "Canal d'équipe · tous les membres de l'équipe", "directSub": "Message direct · privé",
+    "teamEmpty": "Aucun message. Dites bonjour à votre équipe 👋",
+    "directEmpty": "C'est le début de votre conversation avec {{name}}.",
+    "typeMessage": "Écrivez un message…", "noTeamChat": "Pas encore de chat d'équipe",
+    "noTeamChatDesc": "Vous pourrez discuter dès que vous ferez partie d'une équipe."
+  },
+  "notifications": { "title": "Notifications", "markAllRead": "Tout marquer comme lu", "empty": "Aucune notification" },
+  "admin": {
+    "overviewTitle": "Aperçu du club",
+    "overviewSubtitle": "Gérez les équipes, les personnes et les installations de KSV Jabbeke.",
+    "statTeams": "Équipes", "statTrainers": "Entraîneurs", "statPlayers": "Joueurs", "statFacilities": "Installations",
+    "actionAddPersonTitle": "Ajouter un joueur ou un entraîneur", "actionAddPersonDesc": "Créer un compte et des identifiants",
+    "actionCreateTeamTitle": "Créer une équipe", "actionCreateTeamDesc": "Puis affecter entraîneurs et joueurs",
+    "actionAddFacilityTitle": "Ajouter une installation", "actionAddFacilityDesc": "Terrains, vestiaires, salles",
+    "teams": "Équipes", "manageAll": "Tout gérer →",
+    "noTeams": "Aucune équipe. Créez votre première équipe pour commencer.",
+    "recentPeople": "Personnes récemment ajoutées", "noAccounts": "Aucun compte.",
+    "signedInAs": "Connecté en tant que {{name}} · Administrateur"
+  },
+  "people": {
+    "title": "Personnes", "subtitle": "Créez et gérez les comptes des entraîneurs, joueurs et administrateurs.",
+    "newAccount": "Nouveau compte", "searchPlaceholder": "Rechercher par nom ou e-mail…", "allRoles": "Tous les rôles",
+    "emptyTitle": "Aucune personne trouvée", "emptyDesc": "Créez des comptes pour vos entraîneurs et joueurs pour commencer.",
+    "deactivated": "(désactivé)", "resetPassword": "Réinitialiser le mot de passe", "deactivate": "Désactiver",
+    "reactivate": "Réactiver", "delete": "Supprimer", "confirmDelete": "Supprimer {{name}} ? Cette action est irréversible.",
+    "tempPasswordTitle": "Mot de passe temporaire", "shareSecurely": "Partagez ces identifiants en toute sécurité",
+    "password": "Mot de passe", "shownOnceShort": "Affiché une seule fois. Demandez au membre de le modifier après la première connexion.",
+    "createTitle": "Nouveau compte", "createHint": "Un mot de passe temporaire est généré automatiquement et affiché une fois.",
+    "fullNamePlaceholder": "Jean Dupont", "emailPlaceholder": "jean@club.be", "phoneOptional": "Téléphone (facultatif)",
+    "teamRequired": "Équipe", "teamSelect": "Choisir une équipe…", "teamNone": "Pas encore d'équipe",
+    "playerNeedsTeam": "Un joueur doit être affecté à une équipe.", "createAccount": "Créer le compte",
+    "administrator": "Administrateur"
+  },
+  "facilities": {
+    "title": "Installations",
+    "subtitle": "Terrains, vestiaires et salles de réunion que vous pouvez réserver pour les activités.",
+    "newFacility": "Nouvelle installation", "emptyTitle": "Aucune installation",
+    "emptyDesc": "Ajoutez des terrains et des salles pour que les entraîneurs puissent les réserver et éviter les doubles réservations.",
+    "confirmDelete": "Supprimer {{name}} ?", "createTitle": "Nouvelle installation", "editTitle": "Modifier l'installation", "name": "Nom",
+    "namePlaceholder": "p. ex. Terrain principal", "type": "Type", "capacity": "Capacité",
+    "location": "Adresse", "locationPlaceholder": "p. ex. Krukkelstraat, 8490 Jabbeke"
+  },
+  "maps": { "open": "Ouvrir dans une carte", "choose": "Choisir une app", "google": "Google Maps", "waze": "Waze", "apple": "Plans (Apple)" },
+  "addCal": { "button": "Ajouter à l'agenda", "google": "Google Agenda", "apple": "Calendrier Apple", "download": "Télécharger (.ics)" },
+  "subscribe": {
+    "button": "S'abonner", "title": "S'abonner à votre agenda",
+    "intro": "Ajoutez cet agenda à votre téléphone ou ordinateur. Il se met à jour automatiquement quand les activités changent.",
+    "copy": "Copier", "copied": "Copié", "apple": "Apple / Outlook", "google": "Google Agenda",
+    "autoUpdate": "Votre application d'agenda l'actualise automatiquement (généralement sous un jour).",
+    "reset": "Réinitialiser le lien", "resetConfirm": "Réinitialiser votre lien d'agenda ? L'ancienne URL cessera de fonctionner."
+  },
+  "performance": {
+    "ratePlayers": "Évaluer les joueurs",
+    "rateIntro": "Donnez à chaque joueur jusqu'à 5 étoiles pour la performance et la mentalité. Optionnel — évaluez qui vous voulez.",
+    "noPlayers": "Aucun joueur à évaluer pour l'instant.",
+    "performanceRating": "Performance",
+    "mentalityRating": "Mentalité",
+    "note": "Note",
+    "notePlaceholder": "Note privée facultative (réservée au staff — pas visible par le joueur)",
+    "save": "Enregistrer les évaluations",
+    "subtitle": "Performance dans le temps",
+    "notFound": "Aucune donnée de performance",
+    "statAvgPerformance": "Perf. moyenne",
+    "statAvgMentality": "Mentalité moyenne",
+    "statRated": "Nombre d'évaluations",
+    "statAppearances": "Présences",
+    "statAvailability": "Disponibilité",
+    "statSelection": "Sélectionné",
+    "noData": "Pas encore assez de données.",
+    "recent": "Évaluations récentes",
+    "notRatedYet": "Pas encore d'évaluations.",
+    "teamSummary": "Performance",
+    "teamSummaryDesc": "Évaluation moyenne par joueur. Touchez un nom pour les détails.",
+    "overviewTitle": "Performance des joueurs",
+    "overviewSubtitle": "Évaluations moyennes et tendances par joueur, sur la saison.",
+    "noTeams": "Vous n'entraînez encore aucune équipe."
+  },
+  "geo": {
+    "verified": "Adresse vérifiée",
+    "notFound": "Adresse introuvable — choisissez une suggestion ou vérifiez l'orthographe.",
+    "findVenue": "Trouver le terrain de {{opponent}}"
+  },
+  "dates": { "today": "Aujourd'hui", "tomorrow": "Demain" }
+}

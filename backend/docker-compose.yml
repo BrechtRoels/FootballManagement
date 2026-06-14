@@ -1,0 +1,23 @@
+# Local development database. In production you point DATABASE_URL at Supabase
+# and do not need this container.
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: football_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: football
+      POSTGRES_PASSWORD: football
+      POSTGRES_DB: football
+    ports:
+      - "5432:5432"
+    volumes:
+      - football_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U football -d football"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  football_pgdata:
