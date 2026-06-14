@@ -1,3 +1,4 @@
+import os
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
@@ -13,10 +14,13 @@ import app.models  # noqa: F401,E402
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # For the foundation we create tables on startup. For production-grade
-    # schema management, switch to Alembic migrations (see README).
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
+    # Create tables on startup for a persistent server / local dev. On Vercel
+    # (serverless) this is skipped — running DDL on every cold start is wasteful,
+    # and the schema is created once by `python -m app.seed` at deploy time. For
+    # ongoing schema changes, switch to Alembic migrations (see README).
+    if not os.getenv("VERCEL"):
+        async with engine.begin() as conn:
+            await conn.run_sync(Base.metadata.create_all)
     yield
     await engine.dispose()
 

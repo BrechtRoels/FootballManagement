@@ -1,3 +1,4 @@
+import os
 from collections.abc import AsyncGenerator
 
 from sqlalchemy.ext.asyncio import (
@@ -6,19 +7,26 @@ from sqlalchemy.ext.asyncio import (
     create_async_engine,
 )
 from sqlalchemy.orm import DeclarativeBase
+from sqlalchemy.pool import NullPool
 
 from app.core.config import settings
 
-engine = create_async_engine(
-    settings.database_url,
-    echo=False,
-    pool_pre_ping=True,
-    # Supabase's connection pooler (PgBouncer, "Transaction" mode on port 6543)
-    # does not support server-side prepared statements. Disabling them on psycopg3
-    # keeps the app working through the pooler in production; it is harmless on a
-    # direct local connection.
-    connect_args={"prepare_threshold": None},
-)
+# Supabase's connection pooler (PgBouncer, "Transaction" mode on port 6543) does
+# not support server-side prepared statements. Disabling them on psycopg3 keeps
+# the app working through the pooler in production; harmless on a direct local
+# connection.
+_engine_kwargs: dict = {
+    "echo": False,
+    "connect_args": {"prepare_threshold": None},
+}
+if os.getenv("VERCEL"):
+    # Serverless: don't hold a connection pool across frozen/thawed invocations —
+    # open per request and let Supabase's pooler multiplex.
+    _engine_kwargs["poolclass"] = NullPool
+else:
+    _engine_kwargs["pool_pre_ping"] = True
+
+engine = create_async_engine(settings.database_url, **_engine_kwargs)
 
 AsyncSessionLocal = async_sessionmaker(
     bind=engine,

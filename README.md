@@ -109,16 +109,15 @@ for overlapping bookings of the same facility and warns before you double-book �
 
 ## Production deployment
 
-**Full step-by-step: [DEPLOY.md](DEPLOY.md).** In short — three free services that redeploy on every
-`git push`:
+**Full step-by-step: [DEPLOY.md](DEPLOY.md).** Everything runs on **Vercel + Supabase** as a **single
+Vercel project** (no separate server, same origin so no CORS), redeploying on every `git push`:
 
-1. **Database — Supabase:** create a project, copy the *Connection pooling* string (Transaction mode,
-   port 6543) into `DATABASE_URL` (`postgresql+psycopg://…?sslmode=require`).
-2. **Backend — Render:** connect the repo as a Blueprint ([`render.yaml`](render.yaml)); set
-   `DATABASE_URL`, `CORS_ORIGINS` and `FIRST_ADMIN_PASSWORD`. Run `python -m app.seed` once
-   (against the Supabase URL) to create the admin.
-3. **Frontend — Vercel:** import the repo with root `frontend/` ([`frontend/vercel.json`](frontend/vercel.json));
-   set `VITE_API_URL=https://<your-render-app>.onrender.com/api`.
+1. **Database — Supabase:** copy the *Connection pooling* string (Transaction mode, port 6543, free &
+   IPv4) into `DATABASE_URL` (`postgresql+psycopg://…?sslmode=require`). Run `python -m app.seed` once
+   against it to create the schema + admin.
+2. **Vercel (one project, repo root):** the root [`vercel.json`](vercel.json) builds the React site and
+   runs FastAPI as a Python serverless function ([`api/index.py`](api/index.py)) under `/api`. Set just
+   `DATABASE_URL` and `SECRET_KEY`. Site at `/`, API at `/api/*` on one domain.
 
 ### Before going live
 - Set a strong `SECRET_KEY` (`python -c "import secrets; print(secrets.token_urlsafe(48))"`).
