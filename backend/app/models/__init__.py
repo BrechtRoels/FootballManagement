@@ -15,6 +15,7 @@ from app.models.enums import (
 from app.models.message import Message
 from app.models.notification import Notification
 from app.models.player_performance import PlayerPerformance
+from app.models.push_subscription import PushSubscription
 from app.models.resource import Resource
 from app.models.team import Team, TeamMembership
 from app.models.team_dressing_room import TeamDressingRoom
@@ -30,6 +31,7 @@ __all__ = [
     "Message",
     "Notification",
     "PlayerPerformance",
+    "PushSubscription",
     "Resource",
     "Team",
     "TeamMembership",

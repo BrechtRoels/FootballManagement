@@ -6,6 +6,11 @@ import { AuthProvider } from "./auth/AuthContext";
 import App from "./App";
 import "./i18n";
 import "./index.css";
+import { registerSW } from "virtual:pwa-register";
+
+// Register the service worker. autoUpdate (see vite.config) refreshes the cache
+// in the background; immediate activates it on first load too.
+registerSW({ immediate: true });
 
 const queryClient = new QueryClient({
   defaultOptions: {

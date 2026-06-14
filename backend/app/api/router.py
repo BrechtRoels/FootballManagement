@@ -9,6 +9,7 @@ from app.api.routes import (
     messages,
     notifications,
     performance,
+    push,
     resources,
     teams,
     users,
@@ -26,3 +27,4 @@ api_router.include_router(notifications.router)
 api_router.include_router(calendar.router)
 api_router.include_router(performance.router)
 api_router.include_router(geocode.router)
+api_router.include_router(push.router)

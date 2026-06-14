@@ -43,6 +43,18 @@ async def notify_team(
             )
         )
 
+    # Also deliver as a Web Push to any subscribed browsers (no-op if push is
+    # not configured or nobody is subscribed).
+    from app.services.push import activity_url, send_push_to_users
+
+    await send_push_to_users(
+        db,
+        user_ids,
+        title=title,
+        body=body,
+        url=activity_url(related_activity_id),
+    )
+
 
 async def ensure_availability_rows(db: AsyncSession, activity: Activity) -> None:
     """Create blank availability rows for every player in the activity's team."""

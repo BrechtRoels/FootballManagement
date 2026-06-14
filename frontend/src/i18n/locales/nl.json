@@ -31,6 +31,7 @@
   "availability": { "available": "Beschikbaar", "unavailable": "Niet beschikbaar", "maybe": "Misschien", "unknown": "Geen antwoord" },
   "attend": { "yes": "Ja", "maybe": "Misschien", "no": "Nee" },
   "homeAway": { "home": "Thuis", "away": "Uit" },
+  "weekdayShort": { "0": "Ma", "1": "Di", "2": "Wo", "3": "Do", "4": "Vr", "5": "Za", "6": "Zo" },
   "resourceType": { "pitch": "Terrein", "dressing_room": "Kleedkamer", "room": "Lokaal", "other": "Andere" },
   "dashboard": {
     "welcome": "Welkom terug, {{name}}",
@@ -95,7 +96,16 @@
     "conflictTitle": "Reservatieconflict", "conflictItem": "{{resource}} is al gereserveerd door \"{{activity}}\".",
     "scheduleAnyway": "Toch plannen", "schedule": "Plannen", "saveChanges": "Wijzigingen opslaan", "saveAnyway": "Toch opslaan",
     "errComplete": "Vul de verplichte velden in", "errTitle": "Geef een titel in",
-    "errTimes": "Het einduur moet na het beginuur liggen"
+    "errTimes": "Het einduur moet na het beginuur liggen",
+    "recurrence": {
+      "repeat": "Deze activiteit herhalen",
+      "onDays": "Op dagen", "everyNWeeks": "Elke N weken", "ends": "Eindigt",
+      "untilDate": "Op datum", "afterCount": "Na aantal keer",
+      "errUntil": "Kies een einddatum", "errCount": "Geef een aantal herhalingen op",
+      "skippedTitle": "{{count}} sessie(s) overgeslagen door reservatieconflicten",
+      "applyTo": "Wijzigingen toepassen op",
+      "scopeOne": "Alleen deze activiteit", "scopeFuture": "Deze en volgende activiteiten"
+    }
   },
   "activityDetail": {
     "edit": "Bewerken", "cancel": "Annuleren", "confirmCancel": "Deze activiteit annuleren? Leden worden verwittigd.",
@@ -110,7 +120,12 @@
     "callupNoMatch": "Geen spelers gevonden",
     "callupNoneLeft": "Alle spelers uit voedingsploegen zijn al opgeroepen",
     "callupEmpty": "Nog geen oproepen — zoek hierboven om spelers uit voedingsploegen toe te voegen.",
-    "vs": "tegen {{opponent}}", "notFound": "Activiteit niet gevonden"
+    "vs": "tegen {{opponent}}", "notFound": "Activiteit niet gevonden",
+    "cancelSeriesTitle": "Terugkerende activiteit annuleren",
+    "deleteSeriesTitle": "Terugkerende activiteit verwijderen",
+    "seriesPrompt": "Deze activiteit maakt deel uit van een terugkerende reeks.",
+    "seriesScopeOne": "Alleen deze activiteit",
+    "seriesScopeFuture": "Deze en volgende activiteiten"
   },
   "messages": {
     "title": "Berichten", "subtitle": "Ploegkanalen en één-op-één gesprekken.",
@@ -123,7 +138,7 @@
     "typeMessage": "Typ een bericht…", "noTeamChat": "Nog geen ploegchat",
     "noTeamChatDesc": "Je kan chatten zodra je deel uitmaakt van een ploeg."
   },
-  "notifications": { "title": "Meldingen", "markAllRead": "Alles als gelezen markeren", "empty": "Nog geen meldingen" },
+  "notifications": { "title": "Meldingen", "markAllRead": "Alles als gelezen markeren", "empty": "Nog geen meldingen", "enablePush": "Pushmeldingen inschakelen", "disablePush": "Pushmeldingen uitschakelen", "pushBlocked": "Meldingen zijn geblokkeerd in je browserinstellingen." },
   "admin": {
     "overviewTitle": "Cluboverzicht",
     "overviewSubtitle": "Beheer ploegen, personen en accommodatie voor KSV Jabbeke.",

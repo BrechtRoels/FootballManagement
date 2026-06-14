@@ -22,6 +22,18 @@ async def lifespan(app: FastAPI):
         try:
             async with engine.begin() as conn:
                 await conn.run_sync(Base.metadata.create_all)
+                # create_all never adds columns to existing tables, so apply
+                # additive migrations idempotently here. No-op once applied.
+                # (On serverless this whole block is skipped — run the same
+                # statements manually on the managed DB before deploying.)
+                await conn.exec_driver_sql(
+                    "ALTER TABLE activities "
+                    "ADD COLUMN IF NOT EXISTS series_id uuid"
+                )
+                await conn.exec_driver_sql(
+                    "CREATE INDEX IF NOT EXISTS ix_activities_series_id "
+                    "ON activities (series_id)"
+                )
         except Exception as exc:  # noqa: BLE001
             print(f"[startup] skipped create_all: {exc}")
     yield

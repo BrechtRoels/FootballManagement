@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { AlertTriangle, Loader2, Lock, MapPin } from "lucide-react";
+import { AlertTriangle, Loader2, Lock, MapPin, Repeat } from "lucide-react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import {
   type ActivityCreatePayload,
   checkConflicts,
   createActivity,
+  createRecurringActivity,
   errorMessage,
   listResources,
   listTeams,
@@ -21,7 +22,10 @@ import type {
   ActivityDetail,
   ActivityType,
   Conflict,
+  EditScope,
   HomeAway,
+  RecurrenceSpec,
+  SkippedOccurrence,
 } from "../lib/types";
 
 interface Props {
@@ -34,9 +38,17 @@ interface Props {
 }
 
 const TYPES: ActivityType[] = ["training", "match", "meeting", "event"];
+// 0=Mon .. 6=Sun (matches the backend RecurrenceSpec convention).
+const WEEKDAYS = [0, 1, 2, 3, 4, 5, 6];
 
 function toIso(date: string, time: string): string {
   return new Date(`${date}T${time}`).toISOString();
+}
+
+/** Weekday of a yyyy-MM-dd string as 0=Mon .. 6=Sun. */
+function isoWeekday(dateStr: string): number {
+  const jsDay = new Date(`${dateStr}T00:00`).getDay(); // 0=Sun .. 6=Sat
+  return (jsDay + 6) % 7;
 }
 
 function pad(n: number): string {
@@ -86,6 +98,17 @@ export function ActivityFormModal({
   const [error, setError] = useState<string | null>(null);
   const addrRef = useRef<AddressAutocompleteHandle>(null);
 
+  // Recurrence (create mode only)
+  const [repeat, setRepeat] = useState(false);
+  const [repeatDays, setRepeatDays] = useState<number[]>([]);
+  const [intervalWeeks, setIntervalWeeks] = useState(1);
+  const [endMode, setEndMode] = useState<"until" | "count">("until");
+  const [until, setUntil] = useState("");
+  const [count, setCount] = useState(8);
+  const [skipped, setSkipped] = useState<SkippedOccurrence[] | null>(null);
+  // Series edit scope (edit mode, only when activity belongs to a series)
+  const [editScope, setEditScope] = useState<EditScope>("one");
+
   useEffect(() => {
     if (!open) return;
     if (activity) {
@@ -114,6 +137,14 @@ export function ActivityFormModal({
       setHomeAway("home");
       setResourceIds([]);
     }
+    setRepeat(false);
+    setRepeatDays([]);
+    setIntervalWeeks(1);
+    setEndMode("until");
+    setUntil("");
+    setCount(8);
+    setSkipped(null);
+    setEditScope("one");
     setConflicts([]);
     setError(null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -190,21 +221,46 @@ export function ActivityFormModal({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [date, startTime, endTime, resourceIds.join(","), teamId, open]);
 
+  function buildRecurrence(): RecurrenceSpec {
+    const days = repeatDays.length ? [...repeatDays].sort((a, b) => a - b) : [isoWeekday(date)];
+    return {
+      freq: "weekly",
+      interval: intervalWeeks,
+      days_of_week: days,
+      ...(endMode === "until" ? { until: until || null } : { count }),
+    };
+  }
+
   const mutation = useMutation({
-    mutationFn: ({ force }: { force: boolean }) => {
+    mutationFn: async ({ force }: { force: boolean }) => {
       if (activity) {
         // team and type are structural and locked while editing.
         const { team_id: _team, type: _type, ...changes } = payload!;
-        return updateActivity(activity.id, changes, force);
+        await updateActivity(activity.id, changes, force, editScope);
+        return { skipped: null as SkippedOccurrence[] | null };
       }
-      return createActivity(payload!, force);
+      if (repeat) {
+        const res = await createRecurringActivity(
+          { ...payload!, recurrence: buildRecurrence() },
+          force,
+        );
+        return { skipped: res.skipped };
+      }
+      await createActivity(payload!, force);
+      return { skipped: null as SkippedOccurrence[] | null };
     },
-    onSuccess: () => {
+    onSuccess: (res) => {
       qc.invalidateQueries({ queryKey: ["activities"] });
       qc.invalidateQueries({ queryKey: ["notifications"] });
       if (activity) {
         qc.invalidateQueries({ queryKey: ["activity", activity.id] });
         qc.invalidateQueries({ queryKey: ["squad", activity.id] });
+      }
+      // Recurring create with conflicts: keep the modal open to report which
+      // sessions were skipped instead of silently dropping them.
+      if (res.skipped && res.skipped.length > 0) {
+        setSkipped(res.skipped);
+        return;
       }
       onClose();
     },
@@ -225,7 +281,23 @@ export function ActivityFormModal({
       setError(t("activityForm.errTimes"));
       return;
     }
+    if (!activity && repeat) {
+      if (endMode === "until" && !until) {
+        setError(t("activityForm.recurrence.errUntil"));
+        return;
+      }
+      if (endMode === "count" && (!count || count < 1)) {
+        setError(t("activityForm.recurrence.errCount"));
+        return;
+      }
+    }
     mutation.mutate({ force });
+  }
+
+  function toggleRepeatDay(day: number) {
+    setRepeatDays((days) =>
+      days.includes(day) ? days.filter((d) => d !== day) : [...days, day],
+    );
   }
 
   function toggleResource(id: string) {
@@ -241,6 +313,34 @@ export function ActivityFormModal({
       title={t(isEdit ? "activityForm.editTitle" : "activityForm.title")}
       size="lg"
     >
+      {skipped ? (
+        <div className="space-y-4">
+          <div className="flex gap-3 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3">
+            <AlertTriangle size={18} className="mt-0.5 shrink-0 text-amber-600" />
+            <div className="text-sm text-amber-800">
+              <p className="font-semibold">
+                {t("activityForm.recurrence.skippedTitle", { count: skipped.length })}
+              </p>
+              <ul className="mt-1 list-inside list-disc">
+                {skipped.map((s, i) => (
+                  <li key={i}>
+                    {new Date(s.start_time).toLocaleDateString(undefined, {
+                      weekday: "short",
+                      day: "2-digit",
+                      month: "short",
+                    })}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <div className="flex justify-end pt-2">
+            <button className="btn-primary" onClick={onClose}>
+              {t("common.done")}
+            </button>
+          </div>
+        </div>
+      ) : (
       <div className="space-y-4">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
@@ -358,6 +458,110 @@ export function ActivityFormModal({
           </div>
         </div>
 
+        {!isEdit && (
+          <div className="rounded-lg border border-slate-200 p-3">
+            <label className="flex items-center gap-2 text-sm font-medium text-slate-700">
+              <input
+                type="checkbox"
+                checked={repeat}
+                onChange={(e) => {
+                  setRepeat(e.target.checked);
+                  if (e.target.checked && repeatDays.length === 0 && date) {
+                    setRepeatDays([isoWeekday(date)]);
+                  }
+                }}
+              />
+              <Repeat size={15} className="text-slate-400" />
+              {t("activityForm.recurrence.repeat")}
+            </label>
+
+            {repeat && (
+              <div className="mt-3 space-y-3">
+                <div>
+                  <label className="label">
+                    {t("activityForm.recurrence.onDays")}
+                  </label>
+                  <div className="flex flex-wrap gap-1.5">
+                    {WEEKDAYS.map((d) => {
+                      const active = repeatDays.includes(d);
+                      return (
+                        <button
+                          key={d}
+                          type="button"
+                          onClick={() => toggleRepeatDay(d)}
+                          className={`rounded-lg border px-2.5 py-1 text-sm transition-colors ${
+                            active
+                              ? "border-brand-500 bg-brand-50 text-brand-700"
+                              : "border-slate-300 bg-white text-slate-600 hover:bg-slate-50"
+                          }`}
+                        >
+                          {t(`weekdayShort.${d}`)}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                  <div>
+                    <label className="label">
+                      {t("activityForm.recurrence.everyNWeeks")}
+                    </label>
+                    <input
+                      type="number"
+                      min={1}
+                      max={12}
+                      className="input"
+                      value={intervalWeeks}
+                      onChange={(e) =>
+                        setIntervalWeeks(Math.max(1, Number(e.target.value) || 1))
+                      }
+                    />
+                  </div>
+                  <div>
+                    <label className="label">
+                      {t("activityForm.recurrence.ends")}
+                    </label>
+                    <select
+                      className="select"
+                      value={endMode}
+                      onChange={(e) =>
+                        setEndMode(e.target.value as "until" | "count")
+                      }
+                    >
+                      <option value="until">
+                        {t("activityForm.recurrence.untilDate")}
+                      </option>
+                      <option value="count">
+                        {t("activityForm.recurrence.afterCount")}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
+                {endMode === "until" ? (
+                  <input
+                    type="date"
+                    className="input"
+                    value={until}
+                    min={date}
+                    onChange={(e) => setUntil(e.target.value)}
+                  />
+                ) : (
+                  <input
+                    type="number"
+                    min={1}
+                    max={200}
+                    className="input"
+                    value={count}
+                    onChange={(e) => setCount(Math.max(1, Number(e.target.value) || 1))}
+                  />
+                )}
+              </div>
+            )}
+          </div>
+        )}
+
         {showFacilities && (
           <div>
             <label className="label">{t("activityForm.reserveFacilities")}</label>
@@ -470,6 +674,35 @@ export function ActivityFormModal({
           </div>
         )}
 
+        {isEdit && activity?.series_id && (
+          <div className="rounded-lg border border-slate-200 p-3">
+            <p className="mb-2 flex items-center gap-2 text-sm font-medium text-slate-700">
+              <Repeat size={15} className="text-slate-400" />
+              {t("activityForm.recurrence.applyTo")}
+            </p>
+            <div className="flex flex-col gap-1.5 text-sm text-slate-600">
+              <label className="flex items-center gap-2">
+                <input
+                  type="radio"
+                  name="editScope"
+                  checked={editScope === "one"}
+                  onChange={() => setEditScope("one")}
+                />
+                {t("activityForm.recurrence.scopeOne")}
+              </label>
+              <label className="flex items-center gap-2">
+                <input
+                  type="radio"
+                  name="editScope"
+                  checked={editScope === "future"}
+                  onChange={() => setEditScope("future")}
+                />
+                {t("activityForm.recurrence.scopeFuture")}
+              </label>
+            </div>
+          </div>
+        )}
+
         {error && (
           <div className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">
             {error}
@@ -501,6 +734,7 @@ export function ActivityFormModal({
           )}
         </div>
       </div>
+      )}
     </Modal>
   );
 }

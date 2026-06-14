@@ -5,8 +5,10 @@ import type {
   Availability,
   AvailabilityStatus,
   Conflict,
+  DeleteScope,
   DirectMessage,
   DmContact,
+  EditScope,
   GeocodeResult,
   Membership,
   MembershipRole,
@@ -14,6 +16,8 @@ import type {
   Notification,
   PerformanceEntry,
   PlayerPerformance,
+  RecurrenceSpec,
+  RecurringCreateResult,
   Resource,
   ResourceType,
   SquadEntry,
@@ -191,17 +195,32 @@ export const createActivity = (payload: ActivityCreatePayload, force = false) =>
   api
     .post<ActivityDetail>("/activities", payload, { params: { force } })
     .then((r) => r.data);
+export const createRecurringActivity = (
+  payload: ActivityCreatePayload & { recurrence: RecurrenceSpec },
+  force = false,
+) =>
+  api
+    .post<RecurringCreateResult>("/activities/recurring", payload, {
+      params: { force },
+    })
+    .then((r) => r.data);
 export const updateActivity = (
   id: string,
   payload: Partial<ActivityCreatePayload>,
   force = false,
+  scope: EditScope = "one",
 ) =>
   api
-    .patch<ActivityDetail>(`/activities/${id}`, payload, { params: { force } })
+    .patch<ActivityDetail>(`/activities/${id}`, payload, {
+      params: { force, scope },
+    })
     .then((r) => r.data);
-export const cancelActivity = (id: string) =>
-  api.post<ActivityDetail>(`/activities/${id}/cancel`).then((r) => r.data);
-export const deleteActivity = (id: string) => api.delete(`/activities/${id}`);
+export const cancelActivity = (id: string, scope: DeleteScope = "one") =>
+  api
+    .post<ActivityDetail>(`/activities/${id}/cancel`, null, { params: { scope } })
+    .then((r) => r.data);
+export const deleteActivity = (id: string, scope: DeleteScope = "one") =>
+  api.delete(`/activities/${id}`, { params: { scope } });
 export const setAvailability = (
   activityId: string,
   status: AvailabilityStatus,
@@ -305,3 +324,11 @@ export const listNotifications = (unread_only = false) =>
 export const markNotificationRead = (id: string) =>
   api.post(`/notifications/${id}/read`);
 export const markAllNotificationsRead = () => api.post("/notifications/read-all");
+
+// ---- Web Push ----
+export const getVapidPublicKey = () =>
+  api.get<{ key: string }>("/push/vapid-public-key").then((r) => r.data.key);
+export const savePushSubscription = (sub: PushSubscriptionJSON) =>
+  api.post("/push/subscribe", sub);
+export const deletePushSubscription = (endpoint: string) =>
+  api.post("/push/unsubscribe", { endpoint });

@@ -31,6 +31,7 @@
   "availability": { "available": "Available", "unavailable": "Unavailable", "maybe": "Maybe", "unknown": "No response" },
   "attend": { "yes": "Yes", "maybe": "Maybe", "no": "No" },
   "homeAway": { "home": "Home", "away": "Away" },
+  "weekdayShort": { "0": "Mon", "1": "Tue", "2": "Wed", "3": "Thu", "4": "Fri", "5": "Sat", "6": "Sun" },
   "resourceType": { "pitch": "Pitch", "dressing_room": "Dressing room", "room": "Room", "other": "Other" },
   "dashboard": {
     "welcome": "Welcome back, {{name}}",
@@ -95,7 +96,16 @@
     "conflictTitle": "Booking conflict", "conflictItem": "{{resource}} is already booked by \"{{activity}}\".",
     "scheduleAnyway": "Schedule anyway", "schedule": "Schedule", "saveChanges": "Save changes", "saveAnyway": "Save anyway",
     "errComplete": "Please complete the required fields", "errTitle": "Please enter a title",
-    "errTimes": "End time must be after start time"
+    "errTimes": "End time must be after start time",
+    "recurrence": {
+      "repeat": "Repeat this activity",
+      "onDays": "On days", "everyNWeeks": "Every N weeks", "ends": "Ends",
+      "untilDate": "On date", "afterCount": "After occurrences",
+      "errUntil": "Please pick an end date", "errCount": "Please enter a number of occurrences",
+      "skippedTitle": "{{count}} session(s) skipped due to booking conflicts",
+      "applyTo": "Apply changes to",
+      "scopeOne": "This event only", "scopeFuture": "This and following events"
+    }
   },
   "activityDetail": {
     "edit": "Edit", "cancel": "Cancel", "confirmCancel": "Cancel this activity? Members will be notified.",
@@ -110,7 +120,12 @@
     "callupNoMatch": "No players match your search",
     "callupNoneLeft": "All feeder players are already called up",
     "callupEmpty": "No call-ups yet — search above to add players from feeder teams.",
-    "vs": "vs {{opponent}}", "notFound": "Activity not found"
+    "vs": "vs {{opponent}}", "notFound": "Activity not found",
+    "cancelSeriesTitle": "Cancel recurring activity",
+    "deleteSeriesTitle": "Delete recurring activity",
+    "seriesPrompt": "This activity is part of a recurring series.",
+    "seriesScopeOne": "This event only",
+    "seriesScopeFuture": "This and following events"
   },
   "messages": {
     "title": "Messages", "subtitle": "Team channels and one-to-one conversations.",
@@ -123,7 +138,7 @@
     "typeMessage": "Type a message…", "noTeamChat": "No team chat yet",
     "noTeamChatDesc": "You'll be able to chat once you're part of a team."
   },
-  "notifications": { "title": "Notifications", "markAllRead": "Mark all read", "empty": "No notifications yet" },
+  "notifications": { "title": "Notifications", "markAllRead": "Mark all read", "empty": "No notifications yet", "enablePush": "Enable push notifications", "disablePush": "Disable push notifications", "pushBlocked": "Notifications are blocked in your browser settings." },
   "admin": {
     "overviewTitle": "Club overview",
     "overviewSubtitle": "Manage teams, people and facilities for KSV Jabbeke.",

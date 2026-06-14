@@ -8,6 +8,7 @@ import {
   markAllNotificationsRead,
   markNotificationRead,
 } from "../lib/api";
+import { PushToggle } from "./PushToggle";
 
 export function NotificationBell() {
   const { t } = useTranslation();
@@ -95,6 +96,9 @@ export function NotificationBell() {
                   </button>
                 ))
               )}
+            </div>
+            <div className="border-t border-slate-100">
+              <PushToggle />
             </div>
           </div>
         </>

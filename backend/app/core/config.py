@@ -31,6 +31,10 @@ class Settings(BaseSettings):
     algorithm: str = "HS256"
     access_token_expire_minutes: int = 480
 
+    # The club's local timezone. Recurring activities step by wall-clock time in
+    # this zone (so "18:00" stays 18:00 across DST), not by UTC offset.
+    club_timezone: str = "Europe/Brussels"
+
     # First admin (used by the seed script)
     first_admin_email: str = "admin@ksvjabbeke.be"
     first_admin_password: str = "ChangeMe123!"
@@ -42,6 +46,24 @@ class Settings(BaseSettings):
         "http://localhost:5173",
         "http://127.0.0.1:5173",
     ]
+
+    # --- Web Push (VAPID). Empty keys disable push silently. ---
+    vapid_subject: str = "mailto:admin@ksvjabbeke.be"
+    vapid_public_key: str = ""
+    vapid_private_key_b64: str = ""
+
+    @property
+    def vapid_private_key(self) -> str:
+        """The private key PEM, decoded from its single-line base64 env form."""
+        import base64
+
+        if not self.vapid_private_key_b64:
+            return ""
+        return base64.b64decode(self.vapid_private_key_b64).decode()
+
+    @property
+    def push_enabled(self) -> bool:
+        return bool(self.vapid_public_key and self.vapid_private_key_b64)
 
     @field_validator("cors_origins", mode="before")
     @classmethod

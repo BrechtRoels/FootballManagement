@@ -31,6 +31,7 @@
   "availability": { "available": "Verfügbar", "unavailable": "Nicht verfügbar", "maybe": "Vielleicht", "unknown": "Keine Antwort" },
   "attend": { "yes": "Ja", "maybe": "Vielleicht", "no": "Nein" },
   "homeAway": { "home": "Heim", "away": "Auswärts" },
+  "weekdayShort": { "0": "Mo", "1": "Di", "2": "Mi", "3": "Do", "4": "Fr", "5": "Sa", "6": "So" },
   "resourceType": { "pitch": "Platz", "dressing_room": "Umkleide", "room": "Raum", "other": "Sonstige" },
   "dashboard": {
     "welcome": "Willkommen zurück, {{name}}",
@@ -95,7 +96,16 @@
     "conflictTitle": "Buchungskonflikt", "conflictItem": "{{resource}} ist bereits durch „{{activity}}“ belegt.",
     "scheduleAnyway": "Trotzdem planen", "schedule": "Planen", "saveChanges": "Änderungen speichern", "saveAnyway": "Trotzdem speichern",
     "errComplete": "Bitte fülle die Pflichtfelder aus", "errTitle": "Bitte gib einen Titel ein",
-    "errTimes": "Die Endzeit muss nach der Startzeit liegen"
+    "errTimes": "Die Endzeit muss nach der Startzeit liegen",
+    "recurrence": {
+      "repeat": "Diese Aktivität wiederholen",
+      "onDays": "An Tagen", "everyNWeeks": "Alle N Wochen", "ends": "Endet",
+      "untilDate": "Am Datum", "afterCount": "Nach Anzahl",
+      "errUntil": "Bitte ein Enddatum wählen", "errCount": "Bitte eine Anzahl angeben",
+      "skippedTitle": "{{count}} Termin(e) wegen Buchungskonflikten übersprungen",
+      "applyTo": "Änderungen anwenden auf",
+      "scopeOne": "Nur dieser Termin", "scopeFuture": "Dieser und folgende Termine"
+    }
   },
   "activityDetail": {
     "edit": "Bearbeiten", "cancel": "Absagen", "confirmCancel": "Diese Aktivität absagen? Die Mitglieder werden benachrichtigt.",
@@ -110,7 +120,12 @@
     "callupNoMatch": "Keine Spieler gefunden",
     "callupNoneLeft": "Alle Spieler aus Farmteams sind bereits nominiert",
     "callupEmpty": "Noch keine Nachnominierungen — oben suchen, um Spieler aus Farmteams hinzuzufügen.",
-    "vs": "gegen {{opponent}}", "notFound": "Aktivität nicht gefunden"
+    "vs": "gegen {{opponent}}", "notFound": "Aktivität nicht gefunden",
+    "cancelSeriesTitle": "Wiederkehrende Aktivität absagen",
+    "deleteSeriesTitle": "Wiederkehrende Aktivität löschen",
+    "seriesPrompt": "Diese Aktivität gehört zu einer Serie.",
+    "seriesScopeOne": "Nur dieser Termin",
+    "seriesScopeFuture": "Dieser und folgende Termine"
   },
   "messages": {
     "title": "Nachrichten", "subtitle": "Mannschaftskanäle und Einzelgespräche.",
@@ -123,7 +138,7 @@
     "typeMessage": "Nachricht schreiben…", "noTeamChat": "Noch kein Mannschaftschat",
     "noTeamChatDesc": "Du kannst chatten, sobald du Teil einer Mannschaft bist."
   },
-  "notifications": { "title": "Benachrichtigungen", "markAllRead": "Alle als gelesen markieren", "empty": "Noch keine Benachrichtigungen" },
+  "notifications": { "title": "Benachrichtigungen", "markAllRead": "Alle als gelesen markieren", "empty": "Noch keine Benachrichtigungen", "enablePush": "Push-Benachrichtigungen aktivieren", "disablePush": "Push-Benachrichtigungen deaktivieren", "pushBlocked": "Benachrichtigungen sind in deinen Browsereinstellungen blockiert." },
   "admin": {
     "overviewTitle": "Vereinsübersicht",
     "overviewSubtitle": "Verwalte Mannschaften, Personen und Anlagen für KSV Jabbeke.",

@@ -52,6 +52,11 @@ class Activity(Base):
         default=ActivityStatus.scheduled,
         nullable=False,
     )
+    # Non-null when this activity is one occurrence of a recurring series; the
+    # same UUID is shared across all sibling occurrences. NULL = standalone.
+    series_id: Mapped[uuid.UUID | None] = mapped_column(
+        UUID(as_uuid=True), nullable=True, index=True
+    )
     created_by_id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True), ForeignKey("users.id", ondelete="SET NULL"), nullable=True
     )

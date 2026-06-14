@@ -1,5 +1,6 @@
 import uuid
-from datetime import datetime
+from datetime import date, datetime
+from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
@@ -30,9 +31,34 @@ class ActivityBase(BaseModel):
         return self
 
 
+class RecurrenceSpec(BaseModel):
+    """A weekly repeat rule for creating a series of activities in one action."""
+
+    freq: Literal["weekly"] = "weekly"
+    interval: int = Field(default=1, ge=1, le=12, description="every N weeks")
+    days_of_week: list[int] = Field(
+        min_length=1, description="0=Mon .. 6=Sun"
+    )
+    until: date | None = Field(default=None, description="inclusive end date")
+    count: int | None = Field(default=None, ge=1, le=200)
+
+    @model_validator(mode="after")
+    def _check(self):
+        if (self.until is None) == (self.count is None):
+            raise ValueError("provide exactly one of `until` or `count`")
+        for d in self.days_of_week:
+            if not 0 <= d <= 6:
+                raise ValueError("days_of_week values must be 0..6 (Mon..Sun)")
+        return self
+
+
 class ActivityCreate(ActivityBase):
     team_id: uuid.UUID
     resource_ids: list[uuid.UUID] = []
+
+
+class RecurringActivityCreate(ActivityCreate):
+    recurrence: RecurrenceSpec
 
 
 class ActivityUpdate(BaseModel):
@@ -53,6 +79,7 @@ class ActivityOut(ActivityBase):
     team_id: uuid.UUID
     team_name: str | None = None
     status: ActivityStatus
+    series_id: uuid.UUID | None = None
     created_at: datetime
     resources: list[ResourceOut] = []
 
@@ -103,3 +130,17 @@ class ConflictOut(BaseModel):
     activity_title: str
     start_time: datetime
     end_time: datetime
+
+
+class SkippedOccurrence(BaseModel):
+    """An occurrence that was not created because its resources were booked."""
+
+    start_time: datetime
+    end_time: datetime
+    conflicts: list[ConflictOut] = []
+
+
+class RecurringCreateResult(BaseModel):
+    series_id: uuid.UUID
+    created: list[ActivityOut] = []
+    skipped: list[SkippedOccurrence] = []

@@ -89,6 +89,7 @@ export interface Activity {
   opponent: string | null;
   home_away: HomeAway | null;
   status: ActivityStatus;
+  series_id: string | null;
   created_at: string;
   resources: Resource[];
 }
@@ -114,6 +115,29 @@ export interface Conflict {
   start_time: string;
   end_time: string;
 }
+
+export interface RecurrenceSpec {
+  freq: "weekly";
+  interval: number;
+  days_of_week: number[]; // 0=Mon .. 6=Sun
+  until?: string | null; // yyyy-MM-dd
+  count?: number | null;
+}
+
+export interface SkippedOccurrence {
+  start_time: string;
+  end_time: string;
+  conflicts: Conflict[];
+}
+
+export interface RecurringCreateResult {
+  series_id: string;
+  created: Activity[];
+  skipped: SkippedOccurrence[];
+}
+
+export type EditScope = "one" | "future";
+export type DeleteScope = "one" | "series_future";
 
 export interface Message {
   id: string;

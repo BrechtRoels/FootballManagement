@@ -42,11 +42,16 @@ import {
   Card,
   EmptyState,
   Loading,
+  Modal,
   PageHeader,
   Spinner,
 } from "../components/ui";
 import { fmtDate, fmtRange } from "../lib/format";
-import type { AvailabilityStatus, SquadEntry } from "../lib/types";
+import type {
+  AvailabilityStatus,
+  DeleteScope,
+  SquadEntry,
+} from "../lib/types";
 
 export default function ActivityDetailPage() {
   const { activityId = "" } = useParams();
@@ -56,6 +61,10 @@ export default function ActivityDetailPage() {
   const navigate = useNavigate();
   const [editOpen, setEditOpen] = useState(false);
   const [rateOpen, setRateOpen] = useState(false);
+  // For series occurrences, deleting/cancelling asks one-vs-series first.
+  const [seriesPrompt, setSeriesPrompt] = useState<"cancel" | "delete" | null>(
+    null,
+  );
 
   const { data: activity, isLoading } = useQuery({
     queryKey: ["activity", activityId],
@@ -88,14 +97,15 @@ export default function ActivityDetailPage() {
     onSuccess: invalidate,
   });
   const cancelMut = useMutation({
-    mutationFn: () => cancelActivity(activityId),
+    mutationFn: (scope: DeleteScope) => cancelActivity(activityId, scope),
     onSuccess: () => {
       invalidate();
       qc.invalidateQueries({ queryKey: ["activities"] });
+      setSeriesPrompt(null);
     },
   });
   const deleteMut = useMutation({
-    mutationFn: () => deleteActivity(activityId),
+    mutationFn: (scope: DeleteScope) => deleteActivity(activityId, scope),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ["activities"] });
       navigate("/calendar");
@@ -164,8 +174,9 @@ export default function ActivityDetailPage() {
               <button
                 className="btn-secondary"
                 onClick={() => {
-                  if (confirm(t("activityDetail.confirmCancel")))
-                    cancelMut.mutate();
+                  if (activity.series_id) setSeriesPrompt("cancel");
+                  else if (confirm(t("activityDetail.confirmCancel")))
+                    cancelMut.mutate("one");
                 }}
               >
                 <Ban size={16} /> {t("activityDetail.cancel")}
@@ -173,8 +184,9 @@ export default function ActivityDetailPage() {
               <button
                 className="btn-ghost text-red-600 hover:bg-red-50"
                 onClick={() => {
-                  if (confirm(t("activityDetail.confirmDelete")))
-                    deleteMut.mutate();
+                  if (activity.series_id) setSeriesPrompt("delete");
+                  else if (confirm(t("activityDetail.confirmDelete")))
+                    deleteMut.mutate("one");
                 }}
               >
                 <Trash2 size={16} />
@@ -406,6 +418,45 @@ export default function ActivityDetailPage() {
             onClose={() => setRateOpen(false)}
             activityId={activityId}
           />
+          <Modal
+            open={seriesPrompt !== null}
+            onClose={() => setSeriesPrompt(null)}
+            title={t(
+              seriesPrompt === "delete"
+                ? "activityDetail.deleteSeriesTitle"
+                : "activityDetail.cancelSeriesTitle",
+            )}
+          >
+            <div className="space-y-4">
+              <p className="text-sm text-slate-600">
+                {t("activityDetail.seriesPrompt")}
+              </p>
+              <div className="flex flex-col gap-2">
+                <button
+                  className="btn-secondary justify-center"
+                  disabled={cancelMut.isPending || deleteMut.isPending}
+                  onClick={() =>
+                    seriesPrompt === "delete"
+                      ? deleteMut.mutate("one")
+                      : cancelMut.mutate("one")
+                  }
+                >
+                  {t("activityDetail.seriesScopeOne")}
+                </button>
+                <button
+                  className="btn-danger justify-center"
+                  disabled={cancelMut.isPending || deleteMut.isPending}
+                  onClick={() =>
+                    seriesPrompt === "delete"
+                      ? deleteMut.mutate("series_future")
+                      : cancelMut.mutate("series_future")
+                  }
+                >
+                  {t("activityDetail.seriesScopeFuture")}
+                </button>
+              </div>
+            </div>
+          </Modal>
         </>
       )}
     </div>

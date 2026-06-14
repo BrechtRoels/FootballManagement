@@ -11,3 +11,4 @@ bcrypt>=4.2
 python-multipart>=0.0.20
 email-validator>=2.2
 certifi>=2024.8  # CA bundle for outbound HTTPS (address geocoding)
+pywebpush>=2.0  # Web Push (VAPID) notifications

@@ -16,6 +16,7 @@ from app.schemas.direct_message import (
 )
 from app.schemas.user import UserOut
 from app.services.access import can_dm, get_contactable_user_ids
+from app.services.push import send_push_to_users
 
 router = APIRouter(prefix="/dm", tags=["direct-messages"])
 
@@ -171,14 +172,16 @@ async def send_direct_message(
     db.add(message)
 
     preview = payload.body if len(payload.body) <= 80 else payload.body[:77] + "…"
+    title = f"Message from {current_user.full_name}"
     db.add(
         Notification(
             user_id=user_id,
             type=NotificationType.message,
-            title=f"Message from {current_user.full_name}",
+            title=title,
             body=preview,
         )
     )
+    await send_push_to_users(db, [user_id], title=title, body=preview, url="/messages")
 
     await db.flush()
     await db.refresh(message)

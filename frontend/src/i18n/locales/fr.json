@@ -31,6 +31,7 @@
   "availability": { "available": "Disponible", "unavailable": "Indisponible", "maybe": "Peut-être", "unknown": "Sans réponse" },
   "attend": { "yes": "Oui", "maybe": "Peut-être", "no": "Non" },
   "homeAway": { "home": "Domicile", "away": "Extérieur" },
+  "weekdayShort": { "0": "Lun", "1": "Mar", "2": "Mer", "3": "Jeu", "4": "Ven", "5": "Sam", "6": "Dim" },
   "resourceType": { "pitch": "Terrain", "dressing_room": "Vestiaire", "room": "Salle", "other": "Autre" },
   "dashboard": {
     "welcome": "Bon retour, {{name}}",
@@ -95,7 +96,16 @@
     "conflictTitle": "Conflit de réservation", "conflictItem": "{{resource}} est déjà réservé par « {{activity}} ».",
     "scheduleAnyway": "Planifier quand même", "schedule": "Planifier", "saveChanges": "Enregistrer les modifications", "saveAnyway": "Enregistrer quand même",
     "errComplete": "Veuillez compléter les champs requis", "errTitle": "Veuillez saisir un titre",
-    "errTimes": "L'heure de fin doit être après l'heure de début"
+    "errTimes": "L'heure de fin doit être après l'heure de début",
+    "recurrence": {
+      "repeat": "Répéter cette activité",
+      "onDays": "Les jours", "everyNWeeks": "Toutes les N semaines", "ends": "Se termine",
+      "untilDate": "À la date", "afterCount": "Après un nombre",
+      "errUntil": "Choisissez une date de fin", "errCount": "Indiquez un nombre d'occurrences",
+      "skippedTitle": "{{count}} séance(s) ignorée(s) en raison de conflits de réservation",
+      "applyTo": "Appliquer les modifications à",
+      "scopeOne": "Cet événement uniquement", "scopeFuture": "Cet événement et les suivants"
+    }
   },
   "activityDetail": {
     "edit": "Modifier", "cancel": "Annuler", "confirmCancel": "Annuler cette activité ? Les membres seront avertis.",
@@ -110,7 +120,12 @@
     "callupNoMatch": "Aucun joueur ne correspond",
     "callupNoneLeft": "Tous les joueurs des équipes affiliées sont déjà convoqués",
     "callupEmpty": "Aucune convocation — recherchez ci-dessus pour ajouter des joueurs des équipes affiliées.",
-    "vs": "contre {{opponent}}", "notFound": "Activité introuvable"
+    "vs": "contre {{opponent}}", "notFound": "Activité introuvable",
+    "cancelSeriesTitle": "Annuler l'activité récurrente",
+    "deleteSeriesTitle": "Supprimer l'activité récurrente",
+    "seriesPrompt": "Cette activité fait partie d'une série récurrente.",
+    "seriesScopeOne": "Cet événement uniquement",
+    "seriesScopeFuture": "Cet événement et les suivants"
   },
   "messages": {
     "title": "Messages", "subtitle": "Canaux d'équipe et conversations privées.",
@@ -123,7 +138,7 @@
     "typeMessage": "Écrivez un message…", "noTeamChat": "Pas encore de chat d'équipe",
     "noTeamChatDesc": "Vous pourrez discuter dès que vous ferez partie d'une équipe."
   },
-  "notifications": { "title": "Notifications", "markAllRead": "Tout marquer comme lu", "empty": "Aucune notification" },
+  "notifications": { "title": "Notifications", "markAllRead": "Tout marquer comme lu", "empty": "Aucune notification", "enablePush": "Activer les notifications push", "disablePush": "Désactiver les notifications push", "pushBlocked": "Les notifications sont bloquées dans les réglages de votre navigateur." },
   "admin": {
     "overviewTitle": "Aperçu du club",
     "overviewSubtitle": "Gérez les équipes, les personnes et les installations de KSV Jabbeke.",
