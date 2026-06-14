@@ -50,6 +50,26 @@ class Settings(BaseSettings):
             return [origin.strip() for origin in value.split(",") if origin.strip()]
         return value
 
+    @field_validator("database_url", mode="before")
+    @classmethod
+    def _normalise_db_url(cls, value):
+        """Tolerate common copy/paste slips in the env value (surrounding quotes,
+        whitespace/newlines, a `DATABASE_URL=` prefix) and accept a plain
+        Supabase `postgresql://` string by selecting the psycopg driver."""
+        if not isinstance(value, str):
+            return value
+        v = value.strip()
+        # Drop an accidental `DATABASE_URL=` / `DATABASE_URL =` prefix.
+        for prefix in ("DATABASE_URL=", "DATABASE_URL ="):
+            if v.upper().startswith(prefix):
+                v = v[len(prefix):].strip()
+        v = v.strip().strip('"').strip("'").strip()  # surrounding quotes
+        if v.startswith("postgresql://"):
+            v = "postgresql+psycopg://" + v[len("postgresql://"):]
+        elif v.startswith("postgres://"):
+            v = "postgresql+psycopg://" + v[len("postgres://"):]
+        return v
+
 
 @lru_cache
 def get_settings() -> Settings:
